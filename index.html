@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saddam Teacher | Pandas, NumPy, Matplotlib, Seaborn bo'yicha to'liq qo'llanma</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-950 text-slate-50 min-h-screen">
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-slate-950/90 backdrop-blur sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500/90 to-sky-500/90 text-slate-950 border border-emerald-300/80 font-black text-base shadow shadow-emerald-500/40">ST</span>
+        <div>
+          <h1 class="text-lg md:text-xl font-semibold tracking-tight">Saddam Teacher</h1>
+          <p class="text-[11px] md:text-xs text-slate-400">Python data stack: Pandas · NumPy · Matplotlib · Seaborn — amaliy, o'zbekcha qo'llanma</p>
+        </div>
+      </div>
+      <nav class="hidden md:flex gap-3 text-[11px] font-medium text-slate-300">
+        <a href="#overview" class="hover:text-emerald-300">Kirish</a>
+        <a href="#pandas" class="hover:text-emerald-300">Pandas</a>
+        <a href="#numpy" class="hover:text-sky-300">NumPy</a>
+        <a href="#matplotlib" class="hover:text-violet-300">Matplotlib</a>
+        <a href="#seaborn" class="hover:text-cyan-300">Seaborn</a>
+        <a href="#quiz" class="hover:text-amber-300">Test</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-6 md:py-10 space-y-14 md:space-y-20">
+    <!-- OVERVIEW / HERO -->
+    <section id="overview" class="scroll-mt-24">
+      <div class="grid md:grid-cols-[3fr,2.2fr] gap-6 md:gap-10 items-center">
+        <div class="space-y-4">
+          <p class="inline-flex items-center gap-2 text-[10px] md:text-xs font-semibold tracking-[0.18em] text-emerald-300 uppercase">
+            Python data analysis stack
+            <span class="h-px w-10 bg-emerald-500/60"></span>
+          </p>
+          <h2 class="text-2xl md:text-3xl lg:text-[2.15rem] font-bold tracking-tight leading-snug">
+            Noldan professionalgacha: Pandas, NumPy, Matplotlib va Seaborn bilan ma'lumotlar tahlili
+          </h2>
+          <p class="text-sm md:text-[15px] text-slate-300 leading-relaxed">
+            Ushbu sahifa <span class="font-semibold text-emerald-300">bitta joyda to'liq data stack</span> ni beradi:
+            <span class="font-semibold">NumPy</span> — tezkor massivlar uchun poydevor,
+            <span class="font-semibold">Pandas</span> — jadval ma'lumotlar,
+            <span class="font-semibold">Matplotlib</span> — chizmalar va
+            <span class="font-semibold">Seaborn</span> — chiroyli statistik grafiklar.
+            Har bir bo'limda nazariya, amaliy kod va kichik maslahatlar bor.
+          </p>
+          <div class="flex flex-wrap gap-2 text-[11px]">
+            <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-emerald-200">Pandas · jadval ma'lumotlar</span>
+            <span class="px-2.5 py-1 rounded-full bg-sky-500/10 border border-sky-500/40 text-sky-200">NumPy · massivlar</span>
+            <span class="px-2.5 py-1 rounded-full bg-violet-500/10 border border-violet-500/40 text-violet-200">Matplotlib · chizmalar</span>
+            <span class="px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/40 text-cyan-200">Seaborn · statistik grafiklar</span>
+          </div>
+          <div class="flex flex-wrap gap-3 pt-1">
+            <a href="#pandas" class="px-4 py-2.5 rounded-lg bg-emerald-500 text-slate-950 text-xs md:text-sm font-semibold shadow-sm hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-slate-950">Pandas bo'limidan boshlash</a>
+            <a href="#quiz" class="px-4 py-2.5 rounded-lg border border-slate-700 text-xs md:text-sm font-semibold text-slate-200 hover:border-slate-500">Oxiridagi testga o'tish</a>
+          </div>
+        </div>
+        <div class="rounded-2xl border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-950 p-4 md:p-5 shadow-lg shadow-emerald-500/10 space-y-3">
+          <p class="text-[11px] font-semibold text-slate-300 tracking-wide">To'liq stack misoli</p>
+          <pre class="text-[11px] md:text-xs bg-black/40 border border-slate-800 rounded-xl p-3 overflow-auto leading-relaxed"><code class="text-slate-100">import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Sun'iy ma'lumot: talabalar baholari
+np.random.seed(42)
+soni = 100
+
+baholar = np.random.normal(loc=80, scale=10, size=soni)
+yoshlar = np.random.randint(18, 25, size=soni)
+
+# Pandas DataFrame
+ df = pd.DataFrame({
+    "yosh": yoshlar,
+    "bahosi": baholar,
+ })
+
+# Seaborn + Matplotlib bilan chizma
+sns.set_theme(style="darkgrid")
+plt.figure(figsize=(6, 4))
+sns.scatterplot(data=df, x="yosh", y="bahosi")
+plt.title("Yosh va baho orasidagi bog'lanish")
+plt.show()</code></pre>
+          <p class="text-[11px] text-slate-400">
+            Amalda siz ko'p loyihalarda <span class="font-semibold">shu to'rt kutubxonani birga</span> ishlatasiz.
+            Quyida har birini alohida va batafsil ko'rib chiqamiz.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. PANDAS -->
+    <section id="pandas" class="scroll-mt-24">
+      <div class="rounded-3xl border border-emerald-500/25 bg-gradient-to-br from-emerald-950/70 via-slate-950 to-slate-950 p-5 md:p-7 space-y-6">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-emerald-400/20 border border-emerald-300/60 text-[11px] font-bold text-emerald-100">1</span>
+              Pandas — jadval ma'lumotlar (Excel o'rnini bosuvchi super qurol)
+            </h2>
+            <p class="text-xs md:text-[13px] text-emerald-100/80 mt-1 max-w-2xl">
+              CSV/Excel, ma'lumotlar bazasi yoki API dan kelgan jadval ko'rinishidagi ma'lumotni o'qish, tozalash,
+              tahlil qilish va natijani qayta saqlash uchun eng asosiy kutubxona.
+            </p>
+          </div>
+          <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full border border-emerald-400/50 bg-emerald-500/10 text-[11px] font-medium text-emerald-100">Pandas · jadval ma'lumotlar</span>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 items-start">
+          <div class="space-y-3 text-sm md:text-[15px] text-emerald-50/95">
+            <h3 class="text-sm font-semibold text-emerald-200/90">Asosiy tushunchalar</h3>
+            <p>
+              <span class="font-semibold">pandas</span> — bu <span class="font-semibold">jadval ma'lumotlar</span>
+              (row/column) bilan ishlash uchun yozilgan yuqori darajadagi kutubxona.
+              Excel faylingizni tasavvur qiling: pandasda bu <span class="font-semibold">DataFrame</span> bo'ladi.
+            </p>
+            <ul class="list-disc list-inside space-y-1 text-emerald-50/90 text-[13px] md:text-sm">
+              <li><span class="font-semibold">Series</span> — 1D, indekslangan ustun (masalan faqat <code class="bg-emerald-950/70 border border-emerald-500/40 rounded px-1 text-[11px]">yosh</code> ustuni).</li>
+              <li><span class="font-semibold">DataFrame</span> — bir nechta Series dan tashkil topgan 2D jadval.</li>
+              <li><span class="font-semibold">Index</span> — qatorlarni belgilovchi qiymat (0,1,2,... yoki matnli).</li>
+              <li><span class="font-semibold">Label</span> — ustun nomlari: <code class="bg-emerald-950/70 border border-emerald-500/40 rounded px-1 text-[11px]">["ism", "yosh", "bahosi"]</code>.</li>
+            </ul>
+            <p>
+              Pandas yordamida siz <span class="font-semibold">filtrlash</span>,
+              <span class="font-semibold">sortlash</span>, <span class="font-semibold">guruhlash</span>,
+              <span class="font-semibold">agregatsiya</span> (o'rtacha, min/max, sanoq) va
+              <span class="font-semibold">tozalash</span> (NaN, dublikatlar) ishlarini sodda qilib bajarishingiz mumkin.
+            </p>
+            <div class="border border-emerald-400/40 bg-emerald-500/5 rounded-xl p-3 text-[11px] md:text-xs text-emerald-50 space-y-1">
+              <p class="font-semibold text-emerald-200">Tipik ish oqimi (workflow)</p>
+              <ol class="list-decimal list-inside space-y-0.5">
+                <li>Ma'lumotni yuklash: <code class="bg-emerald-950/70 border border-emerald-500/40 rounded px-1">pd.read_csv()</code></li>
+                <li>Ko'zdan kechirish: <code class="bg-emerald-950/70 border border-emerald-500/40 rounded px-1">df.head(), df.info()</code></li>
+                <li>Tozalash: NaN, xatolar, turlarni to'g'rilash</li>
+                <li>Tahlil: filtrlash, groupby, pivot, feature engineering</li>
+                <li>Natijani saqlash yoki vizualizatsiya qilish</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="space-y-3 text-[11px] md:text-xs">
+            <div class="border border-emerald-400/40 rounded-xl bg-emerald-950/40 p-3">
+              <h3 class="text-sm font-semibold text-emerald-100 mb-2">O'rnatish va birinchi DataFrame</h3>
+              <pre class="bg-black/40 border border-emerald-500/30 rounded-lg p-2 overflow-auto text-emerald-50"><code># O'rnatish (virtual muhitda ishlatish tavsiya qilinadi)
+pip install pandas
+
+# Import va oddiy jadval yaratish
+import pandas as pd
+
+data = {
+    "ism": ["Ali", "Vali", "Oysha", "Dilyor"],
+    "yosh": [23, 19, 21, 25],
+    "bahosi": [4.5, 3.8, 4.2, 4.9],
+}
+
+df = pd.DataFrame(data)
+
+print(df)
+print(df.dtypes)</code></pre>
+              <p class="mt-2 text-[11px] text-emerald-100/80">
+                Amalda siz ko'pincha <span class="font-semibold">CSV/Excel</span> dan o'qigansiz, lekin tushunish uchun
+                <span class="font-semibold">o'zimizdan DataFrame yaratib</span> ko'rish juda foydali.
+              </p>
+            </div>
+            <div class="border border-emerald-400/30 rounded-xl bg-emerald-500/5 p-3 text-[11px] md:text-xs text-emerald-50">
+              <p class="font-semibold mb-1">Eslab qolish uchun:</p>
+              <p>Pandas = Excel + Python + tezkor tahlil.</p>
+              <p>Har bir jadval — <span class="font-semibold">DataFrame</span>, har bir ustun — <span class="font-semibold">Series</span>.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pandas chuqurroq: index, clean, groupby, time series + interaktiv operatsiyalar -->
+        <div class="grid lg:grid-cols-[1.15fr,1.85fr] gap-6 items-start">
+          <div class="space-y-3 text-[13px] md:text-sm text-emerald-50/95">
+            <h3 class="text-sm font-semibold text-emerald-200/90">Index, tozalash va vaqt qatordan foydalanish</h3>
+            <details class="border border-emerald-400/30 bg-emerald-950/40 rounded-xl" open>
+              <summary class="px-3 py-2 cursor-pointer select-none text-emerald-100 text-xs font-semibold border-b border-emerald-400/20">Indekslar va ustun nomlari</summary>
+              <pre class="px-3 py-2 bg-black/40 text-[11px] text-emerald-50 overflow-auto"><code># Maxsus indeks berish
+df.index = ["A", "B", "C", "D"]
+
+# Ustun nomlarini o'zgartirish
+df.columns = ["Ism", "Yosh", "Bahosi"]
+
+# Indeks bo'yicha tanlash
+print(df.loc["B"])
+
+# Qatorlar bilan ishlash
+df_reset = df.reset_index()</code></pre>
+            </details>
+            <details class="border border-emerald-400/30 bg-emerald-950/40 rounded-xl">
+              <summary class="px-3 py-2 cursor-pointer select-none text-emerald-100 text-xs font-semibold border-b border-emerald-400/20">Ma'lumotni tozalash (NaN, dublikatlar)</summary>
+              <pre class="px-3 py-2 bg-black/40 text-[11px] text-emerald-50 overflow-auto"><code># Missing qiymatlarni ko'rish
+print(df.isna().sum())
+
+# NaN bo'lgan qatorlarni olib tashlash
+df_clean = df.dropna()
+
+# Ma'lum ustundagi NaN ni o'rtacha qiymat bilan to'ldirish
+df["Yosh"] = df["Yosh"].fillna(df["Yosh"].mean())
+
+# Dublikat qatorlarni aniqlash va o'chirish
+duplicated_rows = df.duplicated()
+df_no_dup = df.drop_duplicates()</code></pre>
+            </details>
+            <details class="border border-emerald-400/30 bg-emerald-950/40 rounded-xl">
+              <summary class="px-3 py-2 cursor-pointer select-none text-emerald-100 text-xs font-semibold border-b border-emerald-400/20">Groupby va agregatsiya</summary>
+              <pre class="px-3 py-2 bg-black/40 text-[11px] text-emerald-50 overflow-auto"><code># Masalan, sotuvlar jadvali bo'lsin: yil, mahsulot, summa ustunlari bor
+summary = (
+    df
+    .groupby(["yil", "mahsulot"])["summa"]
+    .agg(["sum", "mean", "count"])
+    .reset_index()
+)
+
+print(summary.head())</code></pre>
+            </details>
+            <details class="border border-emerald-400/30 bg-emerald-950/40 rounded-xl">
+              <summary class="px-3 py-2 cursor-pointer select-none text-emerald-100 text-xs font-semibold border-b border-emerald-400/20">Vaqt qatori (time series) bilan ishlash</summary>
+              <pre class="px-3 py-2 bg-black/40 text-[11px] text-emerald-50 overflow-auto"><code># Sana ustunini datetime turiga o'tkazish
+ df["sana"] = pd.to_datetime(df["sana"])
+
+# Sanani indeksga qo'yish
+df = df.set_index("sana").sort_index()
+
+# Ma'lum yil bo'yicha filtrlash
+sales_2024 = df["2024"]
+
+# Oylik yig'indi
+oylik = df["summa"].resample("M").sum()</code></pre>
+            </details>
+          </div>
+
+          <!-- Interaktiv: pandas operatsiyalari -->
+          <div class="border border-emerald-400/30 rounded-2xl bg-emerald-950/60 p-4 md:p-5 space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <p class="text-[11px] uppercase tracking-wide text-emerald-300 font-semibold">Eng ko'p ishlatiladigan pandas amallari</p>
+              <p class="text-[10px] text-emerald-200/80">Tugmani bosing va kod misolini ko'ring</p>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-[11px]">
+              <button data-op="BASIC" class="pandas-op-btn px-3 py-2 rounded-lg border border-emerald-400/40 bg-emerald-950/80 text-emerald-50 font-semibold hover:border-emerald-300/80">Ko'rish</button>
+              <button data-op="FILTER" class="pandas-op-btn px-3 py-2 rounded-lg border border-emerald-400/40 bg-emerald-950/80 text-emerald-50 font-semibold hover:border-emerald-300/80">Filtrlash</button>
+              <button data-op="SELECT" class="pandas-op-btn px-3 py-2 rounded-lg border border-emerald-400/40 bg-emerald-950/80 text-emerald-50 font-semibold hover:border-emerald-300/80">loc / iloc</button>
+              <button data-op="GROUP" class="pandas-op-btn px-3 py-2 rounded-lg border border-emerald-400/40 bg-emerald-950/80 text-emerald-50 font-semibold hover:border-emerald-300/80">Groupby</button>
+              <button data-op="CLEAN" class="pandas-op-btn px-3 py-2 rounded-lg border border-emerald-400/40 bg-emerald-950/80 text-emerald-50 font-semibold hover:border-emerald-300/80">Tozalash</button>
+              <button data-op="TIME" class="pandas-op-btn px-3 py-2 rounded-lg border border-emerald-400/40 bg-emerald-950/80 text-emerald-50 font-semibold hover:border-emerald-300/80">Vaqt qatori</button>
+            </div>
+            <div class="space-y-2 text-[13px]">
+              <h4 id="pandas-op-name" class="text-sm font-semibold text-emerald-50">df.head(), df.info() — jadvalni tez ko'rish</h4>
+              <p id="pandas-op-description" class="text-emerald-50/90 text-[12px]">
+                DataFrame juda katta bo'lishi mumkin. head(), tail(), info(), describe() kabi metodlar bilan jadval
+                tuzilmasini va ustun turlarini tez ko'rib chiqamiz.
+              </p>
+              <div>
+                <p class="text-[11px] font-semibold text-emerald-200 mb-1">Kod namunasi:</p>
+                <pre id="pandas-op-example" class="text-[11px] bg-black/40 border border-emerald-400/40 rounded-lg p-2 overflow-auto text-emerald-50"><code># Birinchi 5 qator
+df.head()
+
+# Birinchi 10 qator
+df.head(10)
+
+# Jadval haqida umumiy ma'lumot
+df.info()
+
+# Sonli ustunlar bo'yicha statistikalar
+df.describe()</code></pre>
+              </div>
+              <p id="pandas-op-tip" class="text-[11px] text-emerald-200/90">
+                Maslahat: Yangi datasetni ko'rganingizda birinchi navbatda <span class="font-semibold">df.head(),
+                df.info(), df.describe()</span> ni ishga tushiring — struktura va muammolar (NaN, turlar) tez ko'rinadi.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pandas: ma'lumot yuklash jadvali -->
+        <div class="space-y-3 text-[13px] md:text-sm">
+          <h3 class="text-sm font-semibold text-emerald-200/90">Ma'lumotni yuklash va saqlash (CSV, Excel, SQL)</h3>
+          <div class="overflow-hidden rounded-2xl border border-emerald-400/30 bg-emerald-950/40 text-[11px] md:text-xs">
+            <div class="grid grid-cols-4 bg-emerald-950/80 border-b border-emerald-400/30 text-emerald-100">
+              <div class="px-3 py-2 font-semibold">Funksiya</div>
+              <div class="px-3 py-2 font-semibold">Yo'nalish</div>
+              <div class="px-3 py-2 font-semibold">Qachon ishlatiladi?</div>
+              <div class="px-3 py-2 font-semibold">Misol</div>
+            </div>
+            <div class="divide-y divide-emerald-400/20">
+              <div class="grid grid-cols-4">
+                <div class="px-3 py-2 font-mono text-emerald-200">pd.read_csv</div>
+                <div class="px-3 py-2">Fayl → DataFrame</div>
+                <div class="px-3 py-2">Eng ko'p ishlatiladigan, CSV format</div>
+                <div class="px-3 py-2"><code class="bg-black/40 px-1 rounded border border-emerald-400/40">df = pd.read_csv("data.csv")</code></div>
+              </div>
+              <div class="grid grid-cols-4">
+                <div class="px-3 py-2 font-mono text-emerald-200">pd.read_excel</div>
+                <div class="px-3 py-2">Fayl → DataFrame</div>
+                <div class="px-3 py-2">Excel fayllar (.xlsx)</div>
+                <div class="px-3 py-2"><code class="bg-black/40 px-1 rounded border border-emerald-400/40">df = pd.read_excel("file.xlsx", sheet_name="Sheet1")</code></div>
+              </div>
+              <div class="grid grid-cols-4">
+                <div class="px-3 py-2 font-mono text-emerald-200">pd.read_sql</div>
+                <div class="px-3 py-2">DB → DataFrame</div>
+                <div class="px-3 py-2">Ma'lumotlar bazasidan SELECT natijasini olish</div>
+                <div class="px-3 py-2"><code class="bg-black/40 px-1 rounded border border-emerald-400/40">df = pd.read_sql("SELECT * FROM users", conn)</code></div>
+              </div>
+              <div class="grid grid-cols-4">
+                <div class="px-3 py-2 font-mono text-emerald-200">df.to_csv</div>
+                <div class="px-3 py-2">DataFrame → fayl</div>
+                <div class="px-3 py-2">Natijani CSV faylga saqlash</div>
+                <div class="px-3 py-2"><code class="bg-black/40 px-1 rounded border border-emerald-400/40">df.to_csv("out.csv", index=False)</code></div>
+              </div>
+              <div class="grid grid-cols-4">
+                <div class="px-3 py-2 font-mono text-emerald-200">df.to_excel</div>
+                <div class="px-3 py-2">DataFrame → fayl</div>
+                <div class="px-3 py-2">Natijani Excel ko'rinishida saqlash</div>
+                <div class="px-3 py-2"><code class="bg-black/40 px-1 rounded border border-emerald-400/40">df.to_excel("out.xlsx", index=False)</code></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. NUMPY -->
+    <section id="numpy" class="scroll-mt-24">
+      <div class="rounded-3xl border border-sky-500/30 bg-gradient-to-br from-sky-950/70 via-slate-950 to-slate-950 p-5 md:p-7 space-y-6">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-sky-400/20 border border-sky-300/60 text-[11px] font-bold text-sky-100">2</span>
+              NumPy — tezkor massivlar va matematik amallar
+            </h2>
+            <p class="text-xs md:text-[13px] text-sky-100/80 mt-1 max-w-2xl">
+              NumPy — ilmiy hisoblashning yuragi. Pandas, SciPy, scikit-learn va ko'plab kutubxonalar ichida NumPy
+              <span class="font-semibold">ndarray</span> massivlaridan foydalanadi.
+            </p>
+          </div>
+          <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full border border-sky-400/60 bg-sky-500/10 text-[11px] font-medium text-sky-100">NumPy · array & vektorlashtirish</span>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 items-start">
+          <div class="space-y-3 text-[13px] md:text-sm text-sky-50/95">
+            <h3 class="text-sm font-semibold text-sky-200/90">Nima uchun NumPy kerak?</h3>
+            <p>
+              Oddiy Python ro'yxatlari (<code class="bg-sky-950/70 border border-sky-500/40 rounded px-1 text-[11px]">list</code>)
+              moslashuvchan, lekin katta masshtabdagi matematik amallar uchun sekin. 
+              <span class="font-semibold">NumPy array</span> esa C da yozilgan bo'lib, xotira jihatdan ixcham va juda tez ishlaydi.
+            </p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Vektorlashtirilgan amallar: butun massivga bir yo'la amal qo'llash</li>
+              <li>Broadcasting: o'lchamlari turlicha massivlar bilan hisoblash</li>
+              <li>Ko'p o'lchamli massivlar: 1D, 2D (matritsa), 3D (tensor) va h.k.</li>
+              <li>Matritsa algebra: skalyar, vektor, matritsa amallari</li>
+              <li>Tasodifiy sonlar: <code class="bg-sky-950/70 border border-sky-500/40 rounded px-1 text-[11px]">np.random</code></li>
+            </ul>
+            <div class="border border-sky-400/40 bg-sky-500/5 rounded-xl p-3 text-[11px] md:text-xs text-sky-50 space-y-1">
+              <p class="font-semibold text-sky-200">Python list vs NumPy array</p>
+              <pre class="bg-black/40 border border-sky-500/40 rounded-lg p-2 overflow-auto"><code>import numpy as np
+
+py_list = [1, 2, 3, 4]
+np_arr  = np.array([1, 2, 3, 4])
+
+# Listda elementlar ustida aylanish kerak
+py_list2 = [x * 2 for x in py_list]
+
+# NumPy da esa butun massivga bir yo'la amal
+np_arr2 = np_arr * 2</code></pre>
+            </div>
+          </div>
+
+          <div class="space-y-3 text-[11px] md:text-xs">
+            <div class="border border-sky-400/40 rounded-xl bg-sky-950/40 p-3">
+              <h3 class="text-sm font-semibold text-sky-100 mb-2">Asosiy array amallari</h3>
+              <pre class="bg-black/40 border border-sky-500/40 rounded-lg p-2 overflow-auto text-sky-50"><code>import numpy as np
+
+# Array yaratish
+x = np.array([1, 2, 3])
+mat = np.array([[1, 2, 3],
+                [4, 5, 6]])
+
+# Shakl va tur
+print(mat.shape)   # (2, 3)
+print(mat.dtype)   # int64 va hokazo
+
+# Maxsus massivlar
+zeros = np.zeros((3, 3))
+ones  = np.ones((2, 4))
+rand  = np.random.rand(3, 3)  # [0,1) oraliqda tasodifiy
+
+# Index va slicing
+row0 = mat[0]        # birinchi qator
+col1 = mat[:, 1]     # ikkinchi ustun
+sub  = mat[0:2, 1:3] # kichik bo'lak</code></pre>
+            </div>
+            <div class="border border-sky-400/30 rounded-xl bg-sky-500/5 p-3 text-[11px] md:text-xs text-sky-50">
+              <p class="font-semibold mb-1">Maslahat:</p>
+              <p>
+                Pandas ustunlari ichida <span class="font-mono">df["ustun"].values</span> bilan NumPy arrayga o'tib,
+                matematik amallarni tez bajarish mumkin.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- NumPy interaktiv: amallar -->
+        <div class="grid lg:grid-cols-[1.1fr,1.9fr] gap-6 items-start">
+          <div class="space-y-3 text-[13px] md:text-sm text-sky-50/95">
+            <h3 class="text-sm font-semibold text-sky-200/90">Vektorlashtirish, broadcasting va chiziqli algebra</h3>
+            <details class="border border-sky-400/30 bg-sky-950/40 rounded-xl" open>
+              <summary class="px-3 py-2 cursor-pointer select-none text-sky-100 text-xs font-semibold border-b border-sky-400/20">Vektorlashtirilgan amallar</summary>
+              <pre class="px-3 py-2 bg-black/40 text-[11px] text-sky-50 overflow-auto"><code>a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+# Elementlar bo'yicha qo'shish va ko'paytirish
+c = a + b      # [5, 7, 9]
+d = a * b      # [4, 10, 18]
+
+taxmin_foiz = a * 0.18  # Bitta skalyar bilan butun massivga amal</code></pre>
+            </details>
+            <details class="border border-sky-400/30 bg-sky-950/40 rounded-xl">
+              <summary class="px-3 py-2 cursor-pointer select-none text-sky-100 text-xs font-semibold border-b border-sky-400/20">Broadcasting</summary>
+              <pre class="px-3 py-2 bg-black/40 text-[11px] text-sky-50 overflow-auto"><code>mat = np.array([[1, 2, 3],
+                [4, 5, 6]])
+
+# Har bir qatordan 1 ni ayirish
+mat2 = mat - 1
+
+# Ustunlar bo'yicha normalizatsiya qilish
+mean = mat.mean(axis=0)
+std  = mat.std(axis=0)
+
+norm = (mat - mean) / std</code></pre>
+            </details>
+            <details class="border border-sky-400/30 bg-sky-950/40 rounded-xl">
+              <summary class="px-3 py-2 cursor-pointer select-none text-sky-100 text-xs font-semibold border-b border-sky-400/20">Chiziqli algebra va random</summary>
+              <pre class="px-3 py-2 bg-black/40 text-[11px] text-sky-50 overflow-auto"><code>A = np.array([[1, 2],
+              [3, 4]])
+
+b = np.array([1, 2])
+
+# Matritsa-ko'paytma
+C = A @ A          # yoki np.matmul(A, A)
+
+# Chiziqli tenglamalar tizimini yechish
+x = np.linalg.solve(A, b)
+
+# Tasodifiy sonlar
+np.random.seed(42)
+uniform = np.random.rand(5)        # [0,1)
+normal  = np.random.randn(5)       # normal taqsimot</code></pre>
+            </details>
+          </div>
+
+          <div class="border border-sky-400/30 rounded-2xl bg-sky-950/60 p-4 md:p-5 space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <p class="text-[11px] uppercase tracking-wide text-sky-300 font-semibold">NumPy amallari — interaktiv eslatmalar</p>
+              <p class="text-[10px] text-sky-200/80">Bo'limni tanlang</p>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-[11px]">
+              <button data-op="CREATE" class="numpy-op-btn px-3 py-2 rounded-lg border border-sky-400/40 bg-sky-950/80 text-sky-50 font-semibold hover:border-sky-300/80">Array yaratish</button>
+              <button data-op="SHAPE" class="numpy-op-btn px-3 py-2 rounded-lg border border-sky-400/40 bg-sky-950/80 text-sky-50 font-semibold hover:border-sky-300/80">Shakl & slicing</button>
+              <button data-op="VEC" class="numpy-op-btn px-3 py-2 rounded-lg border border-sky-400/40 bg-sky-950/80 text-sky-50 font-semibold hover:border-sky-300/80">Vektorlashtirish</button>
+              <button data-op="BROAD" class="numpy-op-btn px-3 py-2 rounded-lg border border-sky-400/40 bg-sky-950/80 text-sky-50 font-semibold hover:border-sky-300/80">Broadcasting</button>
+              <button data-op="LINALG" class="numpy-op-btn px-3 py-2 rounded-lg border border-sky-400/40 bg-sky-950/80 text-sky-50 font-semibold hover:border-sky-300/80">Lin.algebra</button>
+              <button data-op="RANDOM" class="numpy-op-btn px-3 py-2 rounded-lg border border-sky-400/40 bg-sky-950/80 text-sky-50 font-semibold hover:border-sky-300/80">Random</button>
+            </div>
+            <div class="space-y-2 text-[13px]">
+              <h4 id="numpy-op-name" class="text-sm font-semibold text-sky-50">np.array() — massiv yaratish</h4>
+              <p id="numpy-op-description" class="text-sky-50/90 text-[12px]">
+                NumPy da hamma narsa <span class="font-semibold">ndarray</span> atrofida aylanadi. Massiv yaratishning
+                bir nechta qulay yo'llari bor: ro'yxatdan, maxsus funksiyalardan (zeros, ones, arange, linspace...)
+              </p>
+              <div>
+                <p class="text-[11px] font-semibold text-sky-200 mb-1">Kod namunasi:</p>
+                <pre id="numpy-op-example" class="text-[11px] bg-black/40 border border-sky-400/40 rounded-lg p-2 overflow-auto text-sky-50"><code>import numpy as np
+
+arr = np.array([1, 2, 3])
+mat = np.array([[1, 2, 3],
+                [4, 5, 6]])
+
+z = np.zeros((2, 3))
+one_to_ten = np.arange(1, 11)</code></pre>
+              </div>
+              <p id="numpy-op-tip" class="text-[11px] text-sky-200/90">
+                Maslahat: <span class="font-semibold">np.arange()</span> va <span class="font-semibold">np.linspace()</span>
+                massivlarini ko'p ishlatasiz — sikllarni kamaytirish uchun ularni yodlab oling.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. MATPLOTLIB -->
+    <section id="matplotlib" class="scroll-mt-24">
+      <div class="rounded-3xl border border-violet-500/30 bg-gradient-to-br from-violet-950/70 via-slate-950 to-slate-950 p-5 md:p-7 space-y-6">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-violet-400/20 border border-violet-300/60 text-[11px] font-bold text-violet-100">3</span>
+              Matplotlib — grafiklar va vizualizatsiya asosi
+            </h2>
+            <p class="text-xs md:text-[13px] text-violet-100/80 mt-1 max-w-2xl">
+              Matplotlib — Python uchun eng qadimiy va juda moslashuvchan chizish kutubxonasi. 
+              Ko'pchilik kutubxonalar (Seaborn, pandas.plot, va h.k.) ichida Matplotlib dan foydalanadi.
+            </p>
+          </div>
+          <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full border border-violet-400/60 bg-violet-500/10 text-[11px] font-medium text-violet-100">Matplotlib · vizualizatsiya</span>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 items-start">
+          <div class="space-y-3 text-[13px] md:text-sm text-violet-50/95">
+            <h3 class="text-sm font-semibold text-violet-200/90">Pyplot va obyektga yo'naltirilgan (OO) uslub</h3>
+            <p>
+              Matplotlib bilan ikki xil uslubda ishlash mumkin:
+            </p>
+            <ul class="list-disc list-inside space-y-1">
+              <li><span class="font-semibold">Pyplot uslubi</span> — <code class="bg-violet-950/70 border border-violet-500/40 rounded px-1 text-[11px]">import matplotlib.pyplot as plt</code> va <code class="bg-violet-950/70 border border-violet-500/40 rounded px-1 text-[11px]">plt.plot(...)</code>.</li>
+              <li><span class="font-semibold">OO uslub</span> — <code class="bg-violet-950/70 border border-violet-500/40 rounded px-1 text-[11px]">fig, ax = plt.subplots()</code>, so'ng <code class="bg-violet-950/70 border border-violet-500/40 rounded px-1 text-[11px]">ax.plot()</code> va boshqalar.</li>
+            </ul>
+            <p>
+              Kichik loyihalar uchun pyplot yetarli, lekin ko'p grafiklar va murakkab layoutlarda OO uslub ancha qulay.
+            </p>
+            <div class="border border-violet-400/40 bg-violet-500/5 rounded-xl p-3 text-[11px] md:text-xs text-violet-50 space-y-1">
+              <p class="font-semibold text-violet-200">Oddiy chizma (line plot)</p>
+              <pre class="bg-black/40 border border-violet-500/40 rounded-lg p-2 overflow-auto"><code>import matplotlib.pyplot as plt
+
+x = [1, 2, 3, 4]
+y = [1, 4, 9, 16]
+
+plt.figure(figsize=(5, 3))
+plt.plot(x, y, marker="o")
+plt.title("Oddiy chizma")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.grid(True)
+plt.show()</code></pre>
+            </div>
+          </div>
+
+          <div class="space-y-3 text-[11px] md:text-xs">
+            <div class="border border-violet-400/40 rounded-xl bg-violet-950/40 p-3">
+              <h3 class="text-sm font-semibold text-violet-100 mb-2">Eng ko'p ishlatiladigan grafiklar</h3>
+              <pre class="bg-black/40 border border-violet-500/40 rounded-lg p-2 overflow-auto text-violet-50"><code>import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 2 * np.pi, 100)
+y = np.sin(x)
+
+fig, axs = plt.subplots(2, 2, figsize=(7, 5))
+
+# 1. Chiziqli grafik
+axs[0, 0].plot(x, y, color="cyan")
+axs[0, 0].set_title("Sinus funktsiyasi")
+
+# 2. Nuqtalar (scatter)
+axs[0, 1].scatter(x, y, color="magenta", s=10)
+axs[0, 1].set_title("Scatter")
+
+# 3. Ustunli grafik (bar)
+labels = ["A", "B", "C"]
+values = [10, 15, 7]
+axs[1, 0].bar(labels, values, color="orange")
+axs[1, 0].set_title("Bar chart")
+
+# 4. Histogramma
+rand = np.random.randn(500)
+axs[1, 1].hist(rand, bins=20, color="lime", alpha=0.7)
+axs[1, 1].set_title("Histogram")
+
+plt.tight_layout()
+plt.show()</code></pre>
+            </div>
+            <div class="border border-violet-400/30 rounded-xl bg-violet-500/5 p-3 text-[11px] md:text-xs text-violet-50">
+              <p class="font-semibold mb-1">Maslahat:</p>
+              <p>
+                Har bir grafikda <span class="font-semibold">title, xlabel, ylabel, grid, legend</span> kabi qismlarni
+                to'g'ri yozish — grafikni tushunarli va professional qiladi.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Matplotlib interaktiv: plot turlari -->
+        <div class="border border-violet-400/30 rounded-2xl bg-violet-950/60 p-4 md:p-5 space-y-3">
+          <div class="flex items-center justify-between gap-2">
+            <p class="text-[11px] uppercase tracking-wide text-violet-300 font-semibold">Matplotlib bo'yicha tez eslatmalar</p>
+            <p class="text-[10px] text-violet-200/80">Grafik turini tanlang</p>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] mb-1">
+            <button data-op="LINE" class="mpl-op-btn px-3 py-2 rounded-lg border border-violet-400/40 bg-violet-950/80 text-violet-50 font-semibold hover:border-violet-300/80">Line</button>
+            <button data-op="SCATTER" class="mpl-op-btn px-3 py-2 rounded-lg border border-violet-400/40 bg-violet-950/80 text-violet-50 font-semibold hover:border-violet-300/80">Scatter</button>
+            <button data-op="BAR" class="mpl-op-btn px-3 py-2 rounded-lg border border-violet-400/40 bg-violet-950/80 text-violet-50 font-semibold hover:border-violet-300/80">Bar</button>
+            <button data-op="HIST" class="mpl-op-btn px-3 py-2 rounded-lg border border-violet-400/40 bg-violet-950/80 text-violet-50 font-semibold hover:border-violet-300/80">Hist</button>
+            <button data-op="SUBPLOT" class="mpl-op-btn px-3 py-2 rounded-lg border border-violet-400/40 bg-violet-950/80 text-violet-50 font-semibold hover:border-violet-300/80">Subplots</button>
+            <button data-op="STYLE" class="mpl-op-btn px-3 py-2 rounded-lg border border-violet-400/40 bg-violet-950/80 text-violet-50 font-semibold hover:border-violet-300/80">Stil</button>
+          </div>
+          <div class="space-y-2 text-[13px]">
+            <h4 id="mpl-op-name" class="text-sm font-semibold text-violet-50">Chiziqli grafik (line plot)</h4>
+            <p id="mpl-op-description" class="text-violet-50/90 text-[12px]">
+              Eng ko'p ishlatiladigan grafik turi. Vaqt bo'yicha o'zgarish, trend va ketma-ketliklarni ko'rsatish uchun
+              juda mos.
+            </p>
+            <div>
+              <p class="text-[11px] font-semibold text-violet-200 mb-1">Kod namunasi:</p>
+              <pre id="mpl-op-example" class="text-[11px] bg-black/40 border border-violet-400/40 rounded-lg p-2 overflow-auto text-violet-50"><code>import matplotlib.pyplot as plt
+
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 1, 3, 5]
+
+plt.plot(x, y, marker="o", color="cyan", linestyle="--")
+plt.title("Chiziqli grafik")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.grid(True)
+plt.show()</code></pre>
+            </div>
+            <p id="mpl-op-tip" class="text-[11px] text-violet-200/90">
+              Maslahat: <span class="font-semibold">plt.figure(figsize=(w, h))</span> yordamida grafik o'lchamini boshidan
+              belgilab oling — keyin layout bilan kamroq qiynalasiz.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SEABORN -->
+    <section id="seaborn" class="scroll-mt-24">
+      <div class="rounded-3xl border border-cyan-500/30 bg-gradient-to-br from-cyan-950/70 via-slate-950 to-slate-950 p-5 md:p-7 space-y-6">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-cyan-400/20 border border-cyan-300/60 text-[11px] font-bold text-cyan-100">4</span>
+              Seaborn — statistik grafiklar va chiroyli dizayn
+            </h2>
+            <p class="text-xs md:text-[13px] text-cyan-100/80 mt-1 max-w-2xl">
+              Seaborn — Matplotlib ustiga qurilgan yuqori darajadagi vizualizatsiya kutubxonasi.
+              U avtomatik ravishda chiroyli stil, rang palitralari va statistik grafiklarni taqdim etadi.
+            </p>
+          </div>
+          <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full border border-cyan-400/60 bg-cyan-500/10 text-[11px] font-medium text-cyan-100">Seaborn · statistik vizualizatsiya</span>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 items-start">
+          <div class="space-y-3 text-[13px] md:text-sm text-cyan-50/95">
+            <h3 class="text-sm font-semibold text-cyan-200/90">Asosiy afzalliklari</h3>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Chiroyli <span class="font-semibold">default stil</span> (ranglar, grid, fontlar)</li>
+              <li>Pandas DataFrame bilan juda qulay ishlaydi</li>
+              <li>Statistik grafiklar: <span class="font-semibold">distribution</span>, <span class="font-semibold">regression</span>, <span class="font-semibold">categorical</span></li>
+              <li>Bir nechta o'zgaruvchilar orasidagi bog'lanishni tez ko'rish (pairplot, jointplot)</li>
+            </ul>
+            <div class="border border-cyan-400/40 bg-cyan-500/5 rounded-xl p-3 text-[11px] md:text-xs text-cyan-50 space-y-1">
+              <p class="font-semibold text-cyan-200">Tez start: Seaborn + misollar datasetlari</p>
+              <pre class="bg-black/40 border border-cyan-500/40 rounded-lg p-2 overflow-auto"><code>import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Tayyor datasetlardan birini olish
+tips = sns.load_dataset("tips")
+
+sns.set_theme(style="darkgrid")
+plt.figure(figsize=(6, 4))
+
+# Scatter + regressiya chizig'i
+sns.regplot(data=tips, x="total_bill", y="tip")
+
+plt.title("Hisob summasi va choychaqa orasidagi bog'lanish")
+plt.show()</code></pre>
+            </div>
+          </div>
+
+          <div class="space-y-3 text-[11px] md:text-xs">
+            <div class="border border-cyan-400/40 rounded-xl bg-cyan-950/40 p-3">
+              <h3 class="text-sm font-semibold text-cyan-100 mb-2">Asosiy grafik turlari</h3>
+              <pre class="bg-black/40 border border-cyan-500/40 rounded-lg p-2 overflow-auto text-cyan-50"><code>import seaborn as sns
+import matplotlib.pyplot as plt
+
+penguins = sns.load_dataset("penguins")
+
+# 1. Tarqatish (distribution): histplot / kdeplot
+plt.figure(figsize=(5, 3))
+sns.histplot(data=penguins, x="flipper_length_mm", kde=True)
+plt.title("Qanot uzunligi tarqatilishi")
+plt.show()
+
+# 2. Kategoriyalar: boxplot / violinplot
+plt.figure(figsize=(5, 3))
+sns.boxplot(data=penguins, x="species", y="body_mass_g")
+plt.title("Tur bo'yicha tana massasi")
+plt.show()
+
+# 3. Bog'lanish: scatterplot / pairplot
+sns.pairplot(penguins, hue="species")
+plt.show()</code></pre>
+            </div>
+            <div class="border border-cyan-400/30 rounded-xl bg-cyan-500/5 p-3 text-[11px] md:text-xs text-cyan-50">
+              <p class="font-semibold mb-1">Rang palitralari va stil</p>
+              <pre class="bg-black/40 border border-cyan-500/40 rounded-lg p-2 overflow-auto"><code># Umumiy stil
+dsns.set_theme(style="whitegrid", palette="muted")
+
+# Maxsus palitra
+sns.set_palette("viridis")
+
+# Har bir grafikdan oldin theme ni o'zgartirishingiz mumkin</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seaborn interaktiv: grafik turlari -->
+        <div class="border border-cyan-400/30 rounded-2xl bg-cyan-950/60 p-4 md:p-5 space-y-3">
+          <div class="flex items-center justify-between gap-2">
+            <p class="text-[11px] uppercase tracking-wide text-cyan-300 font-semibold">Seaborn bo'yicha tez eslatmalar</p>
+            <p class="text-[10px] text-cyan-200/80">Grafik turini tanlang</p>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] mb-1">
+            <button data-op="DIST" class="sns-op-btn px-3 py-2 rounded-lg border border-cyan-400/40 bg-cyan-950/80 text-cyan-50 font-semibold hover:border-cyan-300/80">Distribution</button>
+            <button data-op="CAT" class="sns-op-btn px-3 py-2 rounded-lg border border-cyan-400/40 bg-cyan-950/80 text-cyan-50 font-semibold hover:border-cyan-300/80">Categorical</button>
+            <button data-op="REL" class="sns-op-btn px-3 py-2 rounded-lg border border-cyan-400/40 bg-cyan-950/80 text-cyan-50 font-semibold hover:border-cyan-300/80">Relationship</button>
+            <button data-op="MATRIX" class="sns-op-btn px-3 py-2 rounded-lg border border-cyan-400/40 bg-cyan-950/80 text-cyan-50 font-semibold hover:border-cyan-300/80">Heatmap</button>
+            <button data-op="REG" class="sns-op-btn px-3 py-2 rounded-lg border border-cyan-400/40 bg-cyan-950/80 text-cyan-50 font-semibold hover:border-cyan-300/80">Regression</button>
+            <button data-op="STYLE" class="sns-op-btn px-3 py-2 rounded-lg border border-cyan-400/40 bg-cyan-950/80 text-cyan-50 font-semibold hover:border-cyan-300/80">Stil</button>
+          </div>
+          <div class="space-y-2 text-[13px]">
+            <h4 id="sns-op-name" class="text-sm font-semibold text-cyan-50">Tarqatish grafiklari (histplot / kdeplot)</h4>
+            <p id="sns-op-description" class="text-cyan-50/90 text-[12px]">
+              Tarqatish grafiklari ma'lumotning qanday bo'linganini (qayerda ko'p, qayerda kam) ko'rsatadi.
+              Outlier (g'ayrioddiy) qiymatlarni topish uchun juda foydali.
+            </p>
+            <div>
+              <p class="text-[11px] font-semibold text-cyan-200 mb-1">Kod namunasi:</p>
+              <pre id="sns-op-example" class="text-[11px] bg-black/40 border border-cyan-400/40 rounded-lg p-2 overflow-auto text-cyan-50"><code>import seaborn as sns
+import matplotlib.pyplot as plt
+
+sns.set_theme(style="darkgrid")
+penguins = sns.load_dataset("penguins")
+
+plt.figure(figsize=(5, 3))
+sns.histplot(data=penguins, x="body_mass_g", kde=True)
+plt.title("Tana massasining tarqatilishi")
+plt.show()</code></pre>
+            </div>
+            <p id="sns-op-tip" class="text-[11px] text-cyan-200/90">
+              Maslahat: Seaborn deyarli har doim <span class="font-semibold">DataFrame</span> bilan ishlaydi.
+              Parametrlar odatda <span class="font-semibold">data=</span>, <span class="font-semibold">x=</span>, <span class="font-semibold">y=</span>, <span class="font-semibold">hue=</span> ko'rinishida bo'ladi.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ: barcha kutubxonalar bo'yicha -->
+    <section id="quiz" class="scroll-mt-24 mb-10">
+      <div class="rounded-3xl border border-amber-500/30 bg-gradient-to-br from-amber-950/70 via-slate-950 to-slate-950 p-5 md:p-7 space-y-5">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-amber-400/20 border border-amber-300/60 text-[11px] font-bold text-amber-100">Test</span>
+              Qisqa test — Pandas, NumPy, Matplotlib, Seaborn bo'yicha o'zingizni sinab ko'ring
+            </h2>
+            <p class="text-xs md:text-[13px] text-amber-100/80 mt-1 max-w-2xl">
+              8 ta savol: har bir kutubxona bo'yicha kamida bitta savol bor. Tugmani bosib javoblaringizni tekshiring.
+            </p>
+          </div>
+          <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full border border-amber-400/60 bg-amber-500/10 text-[11px] font-medium text-amber-100">Nazariyani mustahkamlash</span>
+        </div>
+
+        <div class="space-y-3 text-[13px] md:text-sm">
+          <!-- Q1 Pandas Series -->
+          <div class="space-y-1" data-question="1">
+            <p class="font-semibold">1. Pandasdagi <code class="bg-black/40 px-1 py-0.5 rounded border border-amber-500/40 text-[11px]">Series</code> nima?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q1" value="series_1d" class="text-amber-500" /> Bitta o'lchamli, indekslangan ma'lumot tuzilmasi (1D ustun)</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q1" value="df_2d" class="text-amber-500" /> Ikki o'lchamli jadval (qatorlar va ustunlar bilan)</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q1" value="csv_func" class="text-amber-500" /> CSV faylni o'qish uchun funksiya</label>
+            <p class="text-[11px] mt-1" id="feedback-1"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q2 NumPy vs list -->
+          <div class="space-y-1" data-question="2">
+            <p class="font-semibold">2. Quyidagilardan qaysi biri <span class="font-semibold">NumPy array</span> ning Python ro'yxatiga (list) nisbatan asosiy afzalligi?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q2" value="numpy_fast_array" class="text-amber-500" /> Katta masshtabdagi matematik amallar uchun tezroq va xotiradan samarali foydalanadi</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q2" value="numpy_strings" class="text-amber-500" /> Faqat matn (string) ma'lumotlarini saqlay oladi</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q2" value="numpy_web" class="text-amber-500" /> Web server ishga tushirish uchun ishlatiladi</label>
+            <p class="text-[11px] mt-1" id="feedback-2"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q3 Matplotlib basic plot -->
+          <div class="space-y-1" data-question="3">
+            <p class="font-semibold">3. Matplotlibda oddiy chiziqli grafik chizish uchun eng ko'p ishlatiladigan funksiya qaysi?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q3" value="plt_plot" class="text-amber-500" /> <code class="bg-black/40 px-1 py-0.5 rounded border border-amber-500/40 text-[11px]">plt.plot()</code></label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q3" value="plt_hist" class="text-amber-500" /> <code class="bg-black/40 px-1 py-0.5 rounded border border-amber-500/40 text-[11px]">plt.hist()</code></label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q3" value="plt_imshow" class="text-amber-500" /> <code class="bg-black/40 px-1 py-0.5 rounded border border-amber-500/40 text-[11px]">plt.imshow()</code></label>
+            <p class="text-[11px] mt-1" id="feedback-3"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q4 Seaborn based on? -->
+          <div class="space-y-1" data-question="4">
+            <p class="font-semibold">4. Seaborn qaysi kutubxona ustiga qurilgan?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q4" value="sns_on_mpl" class="text-amber-500" /> Matplotlib</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q4" value="sns_on_pandas" class="text-amber-500" /> Pandas</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q4" value="sns_on_numpy" class="text-amber-500" /> NumPy</label>
+            <p class="text-[11px] mt-1" id="feedback-4"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q5 Pandas NaN -->
+          <div class="space-y-1" data-question="5">
+            <p class="font-semibold">5. Pandasda qaysi ifoda ustun bo'yicha nechta NaN borligini ko'rsatadi?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q5" value="isna_sum" class="text-amber-500" /> <code class="bg-black/40 px-1 py-0.5 rounded border border-amber-500/40 text-[11px]">df.isna().sum()</code></label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q5" value="dropna" class="text-amber-500" /> <code class="bg-black/40 px-1 py-0.5 rounded border border-amber-500/40 text-[11px]">df.dropna()</code></label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q5" value="fillna_mean" class="text-amber-500" /> <code class="bg-black/40 px-1 py-0.5 rounded border border-amber-500/40 text-[11px]">df.fillna(df.mean())</code></label>
+            <p class="text-[11px] mt-1" id="feedback-5"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q6 NumPy arange -->
+          <div class="space-y-1" data-question="6">
+            <p class="font-semibold">6. <code class="bg-black/40 px-1 py-0.5 rounded border border-amber-500/40 text-[11px]">np.arange(0, 10, 2)</code> qanday massiv hosil qiladi?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q6" value="arange_step2" class="text-amber-500" /> <code class="bg-black/40 px-1 py-0.5 rounded border border-amber-500/40 text-[11px]">[0, 2, 4, 6, 8]</code></label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q6" value="arange_1" class="text-amber-500" /> <code class="bg-black/40 px-1 py-0.5 rounded border border-amber-500/40 text-[11px]">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q6" value="arange_odd" class="text-amber-500" /> <code class="bg-black/40 px-1 py-0.5 rounded border border-amber-500/40 text-[11px]">[1, 3, 5, 7, 9]</code></label>
+            <p class="text-[11px] mt-1" id="feedback-6"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q7 Matplotlib subplots -->
+          <div class="space-y-1" data-question="7">
+            <p class="font-semibold">7. Bir nechta grafiklar (subplots) yaratish uchun ko'p ishlatiladigan funksiya qaysi?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q7" value="plt_subplots" class="text-amber-500" /> <code class="bg-black/40 px-1 py-0.5 rounded border border-amber-500/40 text-[11px]">plt.subplots()</code></label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q7" value="plt_show" class="text-amber-500" /> <code class="bg-black/40 px-1 py-0.5 rounded border border-amber-500/40 text-[11px]">plt.show()</code></label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q7" value="plt_savefig" class="text-amber-500" /> <code class="bg-black/40 px-1 py-0.5 rounded border border-amber-500/40 text-[11px]">plt.savefig()</code></label>
+            <p class="text-[11px] mt-1" id="feedback-7"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q8 Seaborn pairplot -->
+          <div class="space-y-1" data-question="8">
+            <p class="font-semibold">8. Seaborn'dagi <code class="bg-black/40 px-1 py-0.5 rounded border border-amber-500/40 text-[11px]">sns.pairplot()</code> odatda nimani ko'rsatadi?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q8" value="pairplot_rel" class="text-amber-500" /> Bir nechta sonli o'zgaruvchilar orasidagi juftlik bo'yicha bog'lanish va tarqatish</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q8" value="pairplot_single" class="text-amber-500" /> Faqat bitta ustunning tarqatilishini</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q8" value="pairplot_heat" class="text-amber-500" /> Faqat korrelyatsiya matritsasi (heatmap)</label>
+            <p class="text-[11px] mt-1" id="feedback-8"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <button id="check-quiz" class="px-4 py-2 rounded-lg bg-amber-500 text-slate-950 text-xs font-semibold hover:bg-amber-400">Javoblarni tekshirish</button>
+          <p id="quiz-result" class="text-[11px] text-amber-100"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 bg-slate-950/90">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-[11px] text-slate-500">
+      <p>Saddam Teacher — Python data stack (Pandas, NumPy, Matplotlib, Seaborn) bo'yicha qisqa, ammo chuqur amaliy qo'llanma.</p>
+      <p class="flex flex-wrap gap-2 items-center">
+        <a href="https://pandas.pydata.org/docs/" target="_blank" class="text-emerald-300 hover:text-emerald-200">pandas docs</a>
+        <span class="text-slate-600">·</span>
+        <a href="https://numpy.org/doc/" target="_blank" class="text-sky-300 hover:text-sky-200">numpy docs</a>
+        <span class="text-slate-600">·</span>
+        <a href="https://matplotlib.org/stable/" target="_blank" class="text-violet-300 hover:text-violet-200">matplotlib docs</a>
+        <span class="text-slate-600">·</span>
+        <a href="https://seaborn.pydata.org/" target="_blank" class="text-cyan-300 hover:text-cyan-200">seaborn docs</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // PANDAS interaktiv ma'lumotlari
+    const pandasOpData = {
+      BASIC: {
+        title: "df.head(), df.info() — jadvalni tez ko'rish",
+        description:
+          "DataFrame juda katta bo'lishi mumkin. head(), tail(), info(), describe() kabi metodlar bilan jadval tuzilmasini va ustun turlarini tez ko'rib chiqamiz.",
+        example: `# Birinchi 5 qator
+df.head()
+
+# Birinchi 10 qator
+df.head(10)
+
+# Jadval haqida umumiy ma'lumot
+df.info()
+
+# Sonli ustunlar bo'yicha statistikalar
+df.describe()` ,
+        tip: "df.info() va df.describe() — yangi datasetni tushunish uchun eng yaxshi start. Har doim shu ikkisidan boshlang."
+      },
+      FILTER: {
+        title: "Filtrlash — shart bo'yicha qatorlarni tanlash",
+        description:
+          "Boolean filtrlash yordamida ma'lum shartga mos keladigan qatorlarni tanlaymiz. Masalan, yoshi 20 dan katta bo'lgan foydalanuvchilar yoki summa > 1 000 000 bo'lgan sotuvlar.",
+        example: `# Yosh > 20 bo'lgan qatorlarni tanlash
+filtered = df[df["yosh"] > 20]
+
+# Bir nechta shart (AND: & , OR: |)
+mask = (df["yosh"] > 20) & (df["bahosi"] >= 4.0)
+filtered = df[mask]
+
+# .query() bilan yanada o'qilishi oson sintaksis
+filtered2 = df.query("yosh > 20 and bahosi >= 4.0")`,
+        tip: "Shartlar yozayotganda & va | ishlatiladi, lekin har bir shartni qavs ichida yozishni unutmang: (df['col'] > 0) & (df['col2'] < 10)."
+      },
+      SELECT: {
+        title: "loc va iloc — indeks nomi yoki pozitsiyasi bo'yicha tanlash",
+        description:
+          "loc indeks nomi (label) bo'yicha, iloc esa qator/ustun pozitsiyasi (raqami) bo'yicha tanlaydi. DataFrame bilan noaniqlik bo'lmasligi uchun ikkalasini farqlash muhim.",
+        example: `# Faqat bitta ustunni tanlash
+yosh = df["yosh"]           # Series
+
+# Bir nechta ustunlarni tanlash
+subset = df[["ism", "yosh"]]
+
+# loc: indeks va ustun nomi bo'yicha
+cell = df.loc[2, "yosh"]
+rows = df.loc[1:3, ["ism", "bahosi"]]
+
+# iloc: pozitsiya bo'yicha (0,1,2,...)
+cell2 = df.iloc[0, 1]
+rows2 = df.iloc[0:5, 0:2]`,
+        tip: "Eslab qolish oson: loc = label (nom) bo'yicha, iloc = index (raqam) bo'yicha."
+      },
+      GROUP: {
+        title: "groupby — guruhlash va agregatsiya",
+        description:
+          "Biror ustun (yil, kategoriya, mahsulot...) bo'yicha guruhlab, har bir guruh uchun sum, mean, count kabi agregatsiyalarni hisoblaymiz.",
+        example: `# Masalan, sotuvlar DataFrame i bo'lsin
+summary = (
+    df
+    .groupby("mahsulot")["summa"]
+    .sum()
+    .reset_index()
+)
+
+# Birdan ortiq ustun bo'yicha guruhlash
+g = (
+    df
+    .groupby(["yil", "mahsulot"])["summa"]
+    .agg(["sum", "mean", "count"])
+    .reset_index()
+)`,
+        tip: "groupby natijasi ko'pincha indeksli bo'ladi. Kerak bo'lsa, reset_index() bilan oddiy jadvalga qaytaring."
+      },
+      CLEAN: {
+        title: "Tozalash — NaN, dublikatlar, turlarni to'g'rilash",
+        description:
+          "Real ma'lumotlar odatda iflos: yetishmaydigan qiymatlar (NaN), noto'g'ri turlar, dublikat satrlar. Pandas bularni tozalash uchun juda qulay metodlarga ega.",
+        example: `# Missing qiymatlarni topish
+print(df.isna().sum())
+
+# NaN bo'lgan satrlarni tushirib yuborish
+df_clean = df.dropna()
+
+# Ma'lum ustundagi NaN ni o'rtacha qiymat bilan to'ldirish
+df["yosh"] = df["yosh"].fillna(df["yosh"].mean())
+
+# Dublikat satrlarni o'chirish
+df = df.drop_duplicates()
+
+# Ma'lumot turlarini o'zgartirish
+df["yosh"] = df["yosh"].astype("int")`,
+        tip: "Yangi dataset bilan ishlashdan oldin: df.info(), df.isna().sum(), df.describe() — bu uchlik sizga umumiy ahvolni ko'rsatadi."
+      },
+      TIME: {
+        title: "Vaqt qatori (datetime) bilan ishlash",
+        description:
+          "Ko'p biznes ma'lumotlari sana/vaqt bilan bog'liq. Pandas datetime turlari bilan juda yaxshi ishlaydi: filtrlash, resample, rolling oynalar va h.k.",
+        example: `# Sana ustunini datetime turiga o'tkazish
+df["sana"] = pd.to_datetime(df["sana"], format="%Y-%m-%d")
+
+# Sanani indeksga qo'yish va sortlash
+df = df.set_index("sana").sort_index()
+
+# Ma'lum yil-oy bo'yicha filtrlash
+q1_2024 = df["2024-01":"2024-03"]
+
+# Oylik yig'indi
+oylik = df["summa"].resample("M").sum()
+
+# 7 kunlik siljuvchi o'rtacha
+rolling = df["summa"].rolling(window=7).mean()`,
+        tip: "pd.to_datetime(), set_index(), resample() va rolling() — vaqt qatori bilan ishlashdagi asosiy to'rtlik."
+      }
+    };
+
+    const pandasOpButtons = document.querySelectorAll(".pandas-op-btn");
+    const pandasOpNameEl = document.getElementById("pandas-op-name");
+    const pandasOpDescEl = document.getElementById("pandas-op-description");
+    const pandasOpExampleEl = document.getElementById("pandas-op-example");
+    const pandasOpTipEl = document.getElementById("pandas-op-tip");
+
+    pandasOpButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const key = btn.dataset.op;
+        const data = pandasOpData[key];
+        if (!data) return;
+
+        pandasOpButtons.forEach(b => b.classList.remove("border-emerald-300", "bg-emerald-500/10", "text-emerald-100"));
+        btn.classList.add("border-emerald-300", "bg-emerald-500/10", "text-emerald-100");
+
+        pandasOpNameEl.textContent = data.title;
+        pandasOpDescEl.textContent = data.description;
+        pandasOpExampleEl.textContent = data.example;
+        pandasOpTipEl.textContent = data.tip;
+      });
+    });
+
+    // NUMPY interaktiv ma'lumotlari
+    const numpyOpData = {
+      CREATE: {
+        title: "np.array(), zeros(), ones(), arange() — massiv yaratish",
+        description:
+          "NumPy da asosiy obyekt — ndarray. Uni ro'yxatlardan yoki maxsus funksiyalar (zeros, ones, arange, linspace) yordamida hosil qilamiz.",
+        example: `import numpy as np
+
+arr = np.array([1, 2, 3])
+mat = np.array([[1, 2], [3, 4]])
+
+zeros = np.zeros((2, 3))
+ones  = np.ones((3, 3))
+
+# 0 dan 10 gacha, qadam 2
+step = np.arange(0, 10, 2)
+
+# 0 dan 1 gacha 5 ta nuqta
+lin = np.linspace(0, 1, 5)`,
+        tip: "np.arange() — integer qadamlar uchun, np.linspace() esa oraliqni bo'lish uchun juda qulay."
+      },
+      SHAPE: {
+        title: "shape, ndim, slicing — o'lcham va bo'laklash",
+        description:
+          "Massiv o'lchamini va tartibini tushunish juda muhim. shape, ndim, reshape, slicing yordamida massivlar bilan o'ynaymiz.",
+        example: `mat = np.array([[1, 2, 3],
+                [4, 5, 6]])
+
+print(mat.shape)   # (2, 3)
+print(mat.ndim)    # 2
+
+row0 = mat[0]      # birinchi qator
+col1 = mat[:, 1]   # ikkinchi ustun
+sub  = mat[:, 1:3] # oxirgi ikki ustun
+
+flat = mat.ravel() # tekislash (1D ga)
+reshaped = mat.reshape(3, 2)`,
+        tip: "reshape() da elementlar soni o'zgarmasligi kerak. -1 argumenti qolgan o'lchamni avtomatik hisoblab beradi."
+      },
+      VEC: {
+        title: "Vektorlashtirilgan amallar — sikllarni kamaytirish",
+        description:
+          "Elementlar ustida for sikllar yozish o'rniga, butun massivga bir yo'la amal bajarish juda tez va ixcham yoziladi.",
+        example: `a = np.array([1, 2, 3, 4])
+
+# Har bir elementga 10 qo'shish
+b = a + 10
+
+# Har bir elementni 2 ga ko'paytirish
+c = a * 2
+
+# Elementlar bo'yicha ko'paytirish
+d = a * b
+
+# Nisbiy ulush
+share = a / a.sum()`,
+        tip: "Agar o'zingizni for bilan elementma-element yurib chiqqan bo'lsangiz — ehtimol NumPy bilan vektorlashtirishning o'rni bor."
+      },
+      BROAD: {
+        title: "Broadcasting — o'lchamlarni moslashtirib hisoblash",
+        description:
+          "Broadcasting turli shakldagi massivlar bilan ishlashga imkon beradi: masalan, (n, m) shakldagi matritsadan (m,) shakldagi vektorni ayirish.",
+        example: `mat = np.array([[1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9]])
+
+# Ustunlarning o'rtacha qiymatlarini hisoblash
+mean = mat.mean(axis=0)  # shakl: (3,)
+
+# Har bir qatordan shu o'rtachani ayirish (broadcasting)
+centered = mat - mean`,
+        tip: "Broadcasting qoidalari murakkab ko'rinishi mumkin, lekin ko'p hollarda (n, m) - (m,) yoki (n, 1) kabi holatlar yetarli bo'ladi."
+      },
+      LINALG: {
+        title: "np.linalg — chiziqli algebra",
+        description:
+          "Matritsa ko'paytmasi, determinanta, o'z qiymatlar, chiziqli tenglamalar tizimi — barchasi np.linalg ichida.",
+        example: `A = np.array([[3, 1],
+              [1, 2]])
+
+b = np.array([9, 8])
+
+# Ax = b tenglamani yechish
+x = np.linalg.solve(A, b)
+
+# Determinant
+ detA = np.linalg.det(A)
+
+# O'z qiymatlar va o'z vektorlar
+vals, vecs = np.linalg.eig(A)`,
+        tip: "Agar ML yoki statistikaga kiradigan bo'lsangiz, np.linalg funksiyalarini bilish juda foydali bo'ladi."
+      },
+      RANDOM: {
+        title: "np.random — tasodifiy sonlar va sampling",
+        description:
+          "Simulyatsiya, test va sun'iy datasetlar uchun random modulidan foydalanamiz.",
+        example: `np.random.seed(42)  # takrorlanuvchanlik uchun
+
+# [0,1) oraliqda tasodifiy sonlar
+u = np.random.rand(5)
+
+# Standart normal taqsimot
+n = np.random.randn(5)
+
+# Muayyan oraliqda butun sonlar
+ints = np.random.randint(0, 10, size=5)
+
+# Tasodifiy permutatsiya
+perm = np.random.permutation([1, 2, 3, 4, 5])`,
+        tip: "np.random.seed() yordamida tajribalarni takrorlanuvchan qiling — ayniqsa, dars va presentationlarda."
+      }
+    };
+
+    const numpyOpButtons = document.querySelectorAll(".numpy-op-btn");
+    const numpyOpNameEl = document.getElementById("numpy-op-name");
+    const numpyOpDescEl = document.getElementById("numpy-op-description");
+    const numpyOpExampleEl = document.getElementById("numpy-op-example");
+    const numpyOpTipEl = document.getElementById("numpy-op-tip");
+
+    numpyOpButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const key = btn.dataset.op;
+        const data = numpyOpData[key];
+        if (!data) return;
+
+        numpyOpButtons.forEach(b => b.classList.remove("border-sky-300", "bg-sky-500/10", "text-sky-100"));
+        btn.classList.add("border-sky-300", "bg-sky-500/10", "text-sky-100");
+
+        if (numpyOpNameEl) numpyOpNameEl.textContent = data.title;
+        if (numpyOpDescEl) numpyOpDescEl.textContent = data.description;
+        if (numpyOpExampleEl) numpyOpExampleEl.textContent = data.example;
+        if (numpyOpTipEl) numpyOpTipEl.textContent = data.tip;
+      });
+    });
+
+    // MATPLOTLIB interaktiv ma'lumotlari
+    const mplOpData = {
+      LINE: {
+        title: "Chiziqli grafik (line plot)",
+        description:
+          "Trend, vaqt bo'yicha o'zgarish yoki ketma-ket qiymatlarni ko'rsatish uchun ishlatiladi.",
+        example: `import matplotlib.pyplot as plt
+
+x = [1, 2, 3, 4]
+y = [1, 4, 9, 16]
+
+plt.figure(figsize=(5, 3))
+plt.plot(x, y, marker="o", linestyle="-", color="cyan")
+plt.title("Oddiy line plot")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.grid(True)
+plt.show()`,
+        tip: "marker, linestyle va color parametrlarini o'zgartirib turli dizaynlarni sinab ko'ring."
+      },
+      SCATTER: {
+        title: "Scatterplot — nuqtali grafik",
+        description:
+          "Ikki sonli o'zgaruvchi orasidagi bog'lanishni ko'rish uchun juda mos. Korelyatsiya, klasterlar va outlierlar tez ko'rinadi.",
+        example: `plt.figure(figsize=(5, 3))
+plt.scatter(x, y, color="magenta", s=40, alpha=0.7)
+plt.title("Scatterplot")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.show()`,
+        tip: "alpha parametrini kamaytirib (0.3-0.6) nuqtalar ustma-ust tushganda ham ma'lumotni ko'rish osonlashadi."
+      },
+      BAR: {
+        title: "Bar chart — ustunli grafik",
+        description:
+          "Kategoriyalar bo'yicha qiymatlarni solishtirishda (masalan, viloyatlar bo'yicha sotuvlar) eng samarali grafiklardan biri.",
+        example: `labels = ["Yan", "Fev", "Mart"]
+values = [120, 150, 90]
+
+plt.figure(figsize=(5, 3))
+plt.bar(labels, values, color="orange")
+plt.title("Oylik sotuvlar")
+plt.xlabel("Oy")
+plt.ylabel("Miqdor")
+plt.show()`,
+        tip: "Yuqori-ikki kategoriyadan oshib ketsa — bar chart juda vizual bo'ladi. Juda ko'p kategoriya bo'lsa, boshqa grafiklarni o'ylab ko'ring."
+      },
+      HIST: {
+        title: "Histogramma (hist)",
+        description:
+          "Ma'lumot tarqatilishini ko'rsatadi — qaysi oraliqda nechta qiymat borligini bilasiz.",
+        example: `import numpy as np
+
+x = np.random.randn(500)
+
+plt.figure(figsize=(5, 3))
+plt.hist(x, bins=30, color="lime", alpha=0.7)
+plt.title("Normal taqsimotga yaqin histogramma")
+plt.xlabel("Qiymat")
+plt.ylabel("Soni")
+plt.show()`,
+        tip: "bins parametrini o'zgartirib, qanchalik nozik kesimda histogram ko'rayotganingizni boshqarishingiz mumkin."
+      },
+      SUBPLOT: {
+        title: "Subplots — bir nechta grafiklarni bitta rasmda joylash",
+        description:
+          "Bir nechta grafikni solishtirish yoki panel ko'rinishida chiqarish uchun subplots ishlatiladi.",
+        example: `fig, axs = plt.subplots(2, 2, figsize=(7, 5))
+
+axs[0, 0].plot(x, y)
+axs[0, 0].set_title("Line")
+
+axs[0, 1].scatter(x, y)
+axs[0, 1].set_title("Scatter")
+
+axs[1, 0].bar(labels, values)
+axs[1, 0].set_title("Bar")
+
+axs[1, 1].hist(x)
+axs[1, 1].set_title("Hist")
+
+plt.tight_layout()
+plt.show()`,
+        tip: "axs massivini (2D array) indeksi orqali boshqaring: axs[qator, ustun]. plt.tight_layout() grafiklar bir-biriga yopishib qolmasligiga yordam beradi."
+      },
+      STYLE: {
+        title: "Stil va tayyor mavzular (style)",
+        description:
+          "Matplotlib turli stillarni taklif qiladi: 'ggplot', 'seaborn' va boshqalar. Bitta qator bilan butun grafik ko'rinishini o'zgartirishingiz mumkin.",
+        example: `plt.style.use("ggplot")  # Yoki "seaborn-v0_8"
+
+plt.figure(figsize=(5, 3))
+plt.plot(x, y)
+plt.title("Stil qo'llanilgan line plot")
+plt.show()
+
+# Mavjud barcha stilar ro'yxati
+print(plt.style.available)`,
+        tip: "Loyihangizga mos keladigan bir nechta stilni tanlab, butun notebook / skriptga bir xil ko'rinish bering."
+      }
+    };
+
+    const mplOpButtons = document.querySelectorAll(".mpl-op-btn");
+    const mplOpNameEl = document.getElementById("mpl-op-name");
+    const mplOpDescEl = document.getElementById("mpl-op-description");
+    const mplOpExampleEl = document.getElementById("mpl-op-example");
+    const mplOpTipEl = document.getElementById("mpl-op-tip");
+
+    mplOpButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const key = btn.dataset.op;
+        const data = mplOpData[key];
+        if (!data) return;
+
+        mplOpButtons.forEach(b => b.classList.remove("border-violet-300", "bg-violet-500/10", "text-violet-100"));
+        btn.classList.add("border-violet-300", "bg-violet-500/10", "text-violet-100");
+
+        mplOpNameEl.textContent = data.title;
+        mplOpDescEl.textContent = data.description;
+        mplOpExampleEl.textContent = data.example;
+        mplOpTipEl.textContent = data.tip;
+      });
+    });
+
+    // SEABORN interaktiv ma'lumotlari
+    const snsOpData = {
+      DIST: {
+        title: "Tarqatish grafiklari — histplot, kdeplot",
+        description:
+          "Ma'lumot qanday bo'linganini, qayerda ko'p, qayerda kamligini ko'rsatadi. Seaborn histogramma va zichlik (KDE) chizig'ini birlashtirishni juda osonlashtiradi.",
+        example: `import seaborn as sns
+import matplotlib.pyplot as plt
+
+sns.set_theme(style="darkgrid")
+
+tips = sns.load_dataset("tips")
+
+plt.figure(figsize=(5, 3))
+sns.histplot(data=tips, x="total_bill", kde=True)
+plt.title("Hisob summasi tarqatilishi")
+plt.show()`,
+        tip: "Agar ma'lumot sariq, yashil kabi ranglarda juda yorqin bo'lib ketsa, palette yoki color parametrini o'zgartirib ko'ring."
+      },
+      CAT: {
+        title: "Kategoriyali grafiklar — boxplot, violinplot, barplot",
+        description:
+          "Turli kategoriyalar bo'yicha sonli qiymatlarni taqqoslash va tarqatilishini ko'rish uchun ishlatiladi.",
+        example: `penguins = sns.load_dataset("penguins")
+
+plt.figure(figsize=(5, 3))
+sns.boxplot(data=penguins, x="species", y="body_mass_g")
+plt.title("Tur bo'yicha tana massasi (boxplot)")
+plt.show()`,
+        tip: "Seaborn kategoriyali grafiklari hue parametri bilan yana bitta kategoriyani rang orqali ajratishga imkon beradi."
+      },
+      REL: {
+        title: "Relationship — scatterplot va lineplot",
+        description:
+          "Ikki (yoki undan ko'p) o'zgaruvchi orasidagi bog'lanishni ko'rsatish uchun ishlatiladi.",
+        example: `tips = sns.load_dataset("tips")
+
+plt.figure(figsize=(5, 3))
+sns.scatterplot(data=tips, x="total_bill", y="tip", hue="time")
+plt.title("Hisob summasi va choychaqa")
+plt.show()`,
+        tip: "hue, style, size parametrlarini qo'shib, bitta grafikda uchta o'zgaruvchini ham ko'rsatishingiz mumkin."
+      },
+      MATRIX: {
+        title: "Heatmap — matritsa ko'rinishidagi ma'lumotlar",
+        description:
+          "Korrelyatsiya matritsasi, pivot jadval yoki har qanday 2D massivni vizual ko'rish uchun heatmap juda mos.",
+        example: `import numpy as np
+
+corr = penguins.corr(numeric_only=True)
+
+plt.figure(figsize=(5, 4))
+sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f")
+plt.title("Korrelyatsiya matritsasi")
+plt.show()`,
+        tip: "annot=True bilan har bir katakchaga qiymat yoziladi. cmap bilan rang sxemasini tanlaysiz (masalan, 'viridis', 'coolwarm')."
+      },
+      REG: {
+        title: "Regressiya chiziqlari — regplot, lmplot",
+        description:
+          "X va Y o'rtasidagi chiziqli (yoki boshqa turdagi) regressiyani chizma bilan ko'rsatadi.",
+        example: `tips = sns.load_dataset("tips")
+
+plt.figure(figsize=(5, 3))
+sns.regplot(data=tips, x="total_bill", y="tip")
+plt.title("Choychaqa regressiyasi")
+plt.show()`,
+        tip: "regplot kichik misollar uchun yaxshi, lmplot esa FacetGrid bilan birga ko'p fasetlarni chizish imkonini beradi."
+      },
+      STYLE: {
+        title: "Stil, palette va theme",
+        description:
+          "Seaborn umumiy theme, font o'lchami va rang palitralarini boshqaradi.",
+        example: `sns.set_theme(style="whitegrid", palette="muted")
+
+sns.set_palette("viridis")
+
+# Har bir grafik ushbu theme dan foydalanadi
+sns.scatterplot(data=tips, x="total_bill", y="tip")
+plt.show()`,
+        tip: "Dars, prezentatsiya yoki maqolada bitta yagona palitra va stil tanlab, barcha grafiklaringizni vizual jihatdan bir xil qilib qo'ying."
+      }
+    };
+
+    const snsOpButtons = document.querySelectorAll(".sns-op-btn");
+    const snsOpNameEl = document.getElementById("sns-op-name");
+    const snsOpDescEl = document.getElementById("sns-op-description");
+    const snsOpExampleEl = document.getElementById("sns-op-example");
+    const snsOpTipEl = document.getElementById("sns-op-tip");
+
+    snsOpButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const key = btn.dataset.op;
+        const data = snsOpData[key];
+        if (!data) return;
+
+        snsOpButtons.forEach(b => b.classList.remove("border-cyan-300", "bg-cyan-500/10", "text-cyan-100"));
+        btn.classList.add("border-cyan-300", "bg-cyan-500/10", "text-cyan-100");
+
+        snsOpNameEl.textContent = data.title;
+        snsOpDescEl.textContent = data.description;
+        snsOpExampleEl.textContent = data.example;
+        snsOpTipEl.textContent = data.tip;
+      });
+    });
+
+    // QUIZ logikasi
+    const quizAnswers = {
+      q1: "series_1d",
+      q2: "numpy_fast_array",
+      q3: "plt_plot",
+      q4: "sns_on_mpl",
+      q5: "isna_sum",
+      q6: "arange_step2",
+      q7: "plt_subplots",
+      q8: "pairplot_rel"
+    };
+
+    const checkQuizBtn = document.getElementById("check-quiz");
+    const quizResultEl = document.getElementById("quiz-result");
+
+    function checkQuestion(name, feedbackId) {
+      const selected = document.querySelector(`input[name="${name}"]:checked`);
+      const feedbackEl = document.getElementById(feedbackId);
+      if (!feedbackEl) return false;
+      if (!selected) {
+        feedbackEl.textContent = "Javob tanlanmagan.";
+        feedbackEl.className = "text-[11px] mt-1 text-amber-300";
+        return false;
+      }
+      const isCorrect = selected.value === quizAnswers[name];
+      if (isCorrect) {
+        feedbackEl.textContent = "To'g'ri!";
+        feedbackEl.className = "text-[11px] mt-1 text-emerald-300";
+      } else {
+        feedbackEl.textContent = "Noto'g'ri. Tegishli bo'limni yana bir bor ko'rib chiqing.";
+        feedbackEl.className = "text-[11px] mt-1 text-rose-300";
+      }
+      return isCorrect;
+    }
+
+    if (checkQuizBtn) {
+      checkQuizBtn.addEventListener("click", () => {
+        let correctCount = 0;
+        const total = 8;
+
+        if (checkQuestion("q1", "feedback-1")) correctCount++;
+        if (checkQuestion("q2", "feedback-2")) correctCount++;
+        if (checkQuestion("q3", "feedback-3")) correctCount++;
+        if (checkQuestion("q4", "feedback-4")) correctCount++;
+        if (checkQuestion("q5", "feedback-5")) correctCount++;
+        if (checkQuestion("q6", "feedback-6")) correctCount++;
+        if (checkQuestion("q7", "feedback-7")) correctCount++;
+        if (checkQuestion("q8", "feedback-8")) correctCount++;
+
+        if (quizResultEl) {
+          quizResultEl.textContent = `Natija: ${correctCount} / ${total} to'g'ri javob.`;
+          quizResultEl.className =
+            "text-[11px] font-semibold " + (correctCount === total ? "text-emerald-300" : "text-amber-100");
+        }
+      });
+    }
+  </script>
+</body>
+</html>
