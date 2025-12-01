@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saddam Teacher | SQL bo'yicha chuqur, neon va amaliy qo'llanma</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    @keyframes neonPulsePython {
+      0% {
+        box-shadow: 0 0 4px rgba(56, 189, 248, 0.5), 0 0 8px rgba(59, 130, 246, 0.5);
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        box-shadow: 0 0 14px rgba(56, 189, 248, 1), 0 0 30px rgba(129, 140, 248, 1), 0 0 50px rgba(52, 211, 153, 1);
+        transform: translateY(-1px) scale(1.06);
+      }
+      100% {
+        box-shadow: 0 0 4px rgba(56, 189, 248, 0.5), 0 0 8px rgba(59, 130, 246, 0.5);
+        transform: translateY(0) scale(1);
+      }
+    }
+    .neon-python-logo {
+      animation: neonPulsePython 2.4s ease-in-out infinite;
+      background: radial-gradient(circle at 30% 20%, #facc15 0, #facc15 28%, transparent 30%),
+                  radial-gradient(circle at 70% 80%, #38bdf8 0, #38bdf8 28%, transparent 30%),
+                  linear-gradient(135deg, #0f172a, #020617);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-50 min-h-screen">
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-slate-950/90 backdrop-blur sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500/90 to-sky-500/90 text-slate-950 border border-emerald-300/80 font-black text-base shadow shadow-emerald-500/40">ST</span>
+        <div>
+          <h1 class="text-lg md:text-xl font-semibold tracking-tight flex items-center gap-2">
+            Saddam Teacher
+            <span class="neon-python-logo inline-flex h-8 w-8 md:h-9 md:w-9 items-center justify-center rounded-2xl border border-cyan-300/80 text-[11px] md:text-xs font-black text-cyan-200 shadow-lg shadow-cyan-500/60">
+              <span class="tracking-tight">Py</span>
+            </span>
+          </h1>
+          <p class="text-[11px] md:text-xs text-slate-400">
+            SQL & relatsion bazalar — SELECT, WHERE, JOIN, GROUP BY, subquery, window, transaction va indexlar bo'yicha chuqur, neon formatdagi qo'llanma
+          </p>
+        </div>
+      </div>
+      <nav class="hidden md:flex gap-3 text-[11px] font-medium text-slate-300">
+        <a href="#overview" class="hover:text-cyan-300">Kirish</a>
+        <a href="#relational" class="hover:text-sky-300">Relatsion model</a>
+        <a href="#select" class="hover:text-emerald-300">SELECT</a>
+        <a href="#where" class="hover:text-emerald-300">WHERE</a>
+        <a href="#joins" class="hover:text-violet-300">JOIN</a>
+        <a href="#agg" class="hover:text-amber-300">GROUP BY</a>
+        <a href="#subqueries" class="hover:text-rose-300">Subquery & Window</a>
+        <a href="#schema" class="hover:text-cyan-300">Schema & Index</a>
+        <a href="#tx" class="hover:text-fuchsia-300">Transaction</a>
+        <a href="#quiz" class="hover:text-amber-300">Test</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-6 md:py-10 space-y-14 md:space-y-20">
+    <!-- OVERVIEW / HERO -->
+    <section id="overview" class="scroll-mt-24">
+      <div class="grid md:grid-cols-[3fr,2.2fr] gap-6 md:gap-10 items-center">
+        <div class="space-y-4">
+          <p class="inline-flex items-center gap-2 text-[10px] md:text-xs font-semibold tracking-[0.18em] text-cyan-300 uppercase">
+            SQL · relational · ACID
+            <span class="h-px w-10 bg-cyan-500/60"></span>
+          </p>
+          <h2 class="text-2xl md:text-3xl lg:text-[2.15rem] font-bold tracking-tight leading-snug">
+            Noldan senior darajasigacha: SQL bilan ma'lumotlar bazasini o'qish, tahrirlash va tahlil qilish
+          </h2>
+          <p class="text-sm md:text-[15px] text-slate-300 leading-relaxed">
+            Ushbu sahifa <span class="font-semibold text-cyan-300">SQL tilini chuqur</span> o'rganishingiz uchun yozilgan.
+            Jadval, qator, ustun, PK/FK, <span class="font-semibold">JOIN, GROUP BY, subquery, window</span> va
+            <span class="font-semibold">transaction</span> lardan tortib, <span class="font-semibold">index va EXPLAIN</span>
+            gacha birma-bir neon formatda tushuntiriladi.
+          </p>
+          <div class="flex flex-wrap gap-2 text-[11px]">
+            <span class="px-2.5 py-1 rounded-full bg-sky-500/10 border border-sky-500/40 text-sky-200">SELECT · FROM · WHERE</span>
+            <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-emerald-200">JOIN · ON · subquery</span>
+            <span class="px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-200">GROUP BY · HAVING</span>
+            <span class="px-2.5 py-1 rounded-full bg-rose-500/10 border border-rose-500/40 text-rose-200">WINDOW · CTE</span>
+            <span class="px-2.5 py-1 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/40 text-fuchsia-200">ACID · isolation</span>
+          </div>
+          <div class="flex flex-wrap gap-3 pt-1">
+            <a href="#relational" class="px-4 py-2.5 rounded-lg bg-cyan-500 text-slate-950 text-xs md:text-sm font-semibold shadow-sm hover:bg-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-slate-950">Relatsion model bo'limidan boshlash</a>
+            <a href="#quiz" class="px-4 py-2.5 rounded-lg border border-slate-700 text-xs md:text-sm font-semibold text-slate-200 hover:border-slate-500">Oxiridagi SQL testiga o'tish</a>
+          </div>
+        </div>
+        <div class="rounded-2xl border border-cyan-500/50 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-950 p-4 md:p-5 shadow-lg shadow-cyan-500/30 space-y-3">
+          <p class="text-[11px] font-semibold text-cyan-200 tracking-wide flex items-center justify-between">
+            Mini loyiha: talabalar va kurslar bazasi
+            <span class="text-[10px] text-cyan-300/80">PostgreSQL sintaksisi</span>
+          </p>
+<pre class="text-[11px] md:text-xs bg-black/40 border border-cyan-500/40 rounded-xl p-3 overflow-auto leading-relaxed"><code class="text-slate-100">-- 1. Jadval yaratish
+CREATE TABLE students (
+    id          SERIAL PRIMARY KEY,
+    full_name   VARCHAR(100) NOT NULL,
+    group_code  VARCHAR(20),
+    gpa         NUMERIC(3,2)
+);
+
+CREATE TABLE courses (
+    id          SERIAL PRIMARY KEY,
+    title       VARCHAR(100) NOT NULL,
+    credits     INT NOT NULL
+);
+
+CREATE TABLE enrollments (
+    student_id  INT REFERENCES students(id),
+    course_id   INT REFERENCES courses(id),
+    grade       NUMERIC(3,1),
+    PRIMARY KEY (student_id, course_id)
+);
+
+-- 2. Tanlangan kurs bo'yicha kuchli talabalar
+SELECT s.full_name, c.title, e.grade
+FROM enrollments e
+JOIN students   s ON s.id = e.student_id
+JOIN courses    c ON c.id = e.course_id
+WHERE c.title = 'Ma''lumotlar bazasi'
+  AND e.grade >= 4.0
+ORDER BY e.grade DESC;</code></pre>
+          <p class="text-[11px] text-slate-400">
+            Neon SQL sayohati: <span class="font-semibold">SELECT</span> dan boshlaymiz, keyin
+            <span class="font-semibold">WHERE, JOIN, GROUP BY, subquery, window</span> va
+            <span class="font-semibold">transaction/index</span> mavzularini birma-bir ko'ramiz.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. RELATSION MODEL -->
+    <section id="relational" class="scroll-mt-24">
+      <div class="rounded-3xl border border-sky-500/40 bg-gradient-to-br from-sky-950/80 via-slate-950 to-slate-950 p-5 md:p-7 space-y-6">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-sky-400/20 border border-sky-300/60 text-[11px] font-bold text-sky-100">1</span>
+              Relatsion model va SQL asoslari
+            </h2>
+            <p class="text-xs md:text-[13px] text-sky-100/80 mt-1 max-w-2xl">
+              SQL — relational ma'lumotlar bazasi bilan ishlash tili. Relatsion model <span class="font-semibold">jadval</span>,
+              <span class="font-semibold">qator</span>, <span class="font-semibold">ustun</span> va
+              <span class="font-semibold">kalitlar</span> atrofida qurilgan.
+            </p>
+          </div>
+          <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full border border-sky-400/60 bg-sky-500/10 text-[11px] font-medium text-sky-100">RDBMS · jadval · PK/FK · ACID</span>
+        </div>
+
+        <div class="grid lg:grid-cols-[1.1fr,1.9fr] gap-6 items-start">
+          <div class="space-y-3 text-[13px] md:text-sm text-sky-50/95">
+            <h3 class="text-sm font-semibold text-sky-200/90">Asosiy tushunchalar</h3>
+            <ul class="list-disc list-inside space-y-1">
+              <li><span class="font-semibold">Jadval (table)</span> — satrlar (row) va ustunlar (column) dan iborat strukturadir.</li>
+              <li><span class="font-semibold">Qator (row/record)</span> — bitta obyekt haqidagi ma'lumot (bitta talaba, bitta buyurtma...).</li>
+              <li><span class="font-semibold">Ustun (column/field)</span> — obyekt xususiyati (ism, narx, sana...).</li>
+              <li><span class="font-semibold">Primary key (PK)</span> — har bir qatorni noyob aniqlaydigan ustun yoki ustunlar to'plami.</li>
+              <li><span class="font-semibold">Foreign key (FK)</span> — boshqa jadvaldagi PK ga ishora qiluvchi ustun.</li>
+              <li><span class="font-semibold">ACID</span> — tranzaksiyalar uchun <span class="font-semibold">Atomicity, Consistency, Isolation, Durability</span>.</li>
+            </ul>
+            <details class="border border-sky-400/30 bg-sky-950/40 rounded-xl" open>
+              <summary class="px-3 py-2 cursor-pointer select-none text-sky-100 text-xs font-semibold border-b border-sky-400/20">Normalizatsiya (1NF, 2NF, 3NF)</summary>
+              <p class="px-3 py-2 text-[12px] text-sky-50/90">
+                Sodda qilib aytganda, normalizatsiya — <span class="font-semibold">takrorlanayotgan ma'lumotlarni bo'lib tashlash</span>
+                va aloqador jadvallarga ajratish.
+                Natija: kamroq dublikat, kamroq xatolik, yaxshiroq yangilash.
+              </p>
+            </details>
+          </div>
+
+          <div class="overflow-hidden rounded-2xl border border-sky-400/30 bg-sky-950/40 text-[11px] md:text-xs">
+            <div class="grid grid-cols-4 bg-sky-950/80 border-b border-sky-400/30 text-sky-100">
+              <div class="px-3 py-2 font-semibold">Ma'lumot turi</div>
+              <div class="px-3 py-2 font-semibold">Misol</div>
+              <div class="px-3 py-2 font-semibold">Qayerda ishlatish</div>
+              <div class="px-3 py-2 font-semibold">Izoh</div>
+            </div>
+            <div class="divide-y divide-sky-400/20">
+              <div class="grid grid-cols-4">
+                <div class="px-3 py-2 font-mono text-sky-200">INT, BIGINT</div>
+                <div class="px-3 py-2">INT, BIGINT</div>
+                <div class="px-3 py-2">id, count, quantity</div>
+                <div class="px-3 py-2">Butun sonlar uchun.</div>
+              </div>
+              <div class="grid grid-cols-4">
+                <div class="px-3 py-2 font-mono text-sky-200">NUMERIC(p,s)</div>
+                <div class="px-3 py-2">NUMERIC(12,2)</div>
+                <div class="px-3 py-2">price, amount</div>
+                <div class="px-3 py-2">Aniq pul/kasr qiymatlar.</div>
+              </div>
+              <div class="grid grid-cols-4">
+                <div class="px-3 py-2 font-mono text-sky-200">VARCHAR, TEXT</div>
+                <div class="px-3 py-2">VARCHAR(100)</div>
+                <div class="px-3 py-2">name, email</div>
+                <div class="px-3 py-2">Matn ma'lumotlar.</div>
+              </div>
+              <div class="grid grid-cols-4">
+                <div class="px-3 py-2 font-mono text-sky-200">DATE, TIMESTAMP</div>
+                <div class="px-3 py-2">TIMESTAMP</div>
+                <div class="px-3 py-2">created_at</div>
+                <div class="px-3 py-2">Sana/vaqt ma'lumotlar.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. SELECT SINTAKSISI -->
+    <section id="select" class="scroll-mt-24">
+      <div class="rounded-3xl border border-emerald-500/40 bg-gradient-to-br from-emerald-950/80 via-slate-950 to-slate-950 p-5 md:p-7 space-y-6">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-emerald-400/20 border border-emerald-300/60 text-[11px] font-bold text-emerald-100">2</span>
+              SELECT sintaksisi va natija to'plami
+            </h2>
+            <p class="text-xs md:text-[13px] text-emerald-100/80 mt-1 max-w-2xl">
+              SELECT — SQL ning yuragi. U bilan ma'lumotni o'qish, saralash va cheklashni o'rganasangiz, keyingi
+              murakkab mavzular osonroq tushuniladi.
+            </p>
+          </div>
+          <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full border border-emerald-400/60 bg-emerald-500/10 text-[11px] font-medium text-emerald-100">SELECT · DISTINCT · ORDER BY · LIMIT</span>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 items-start text-[11px] md:text-xs">
+          <div class="space-y-3">
+            <div class="border border-emerald-400/40 rounded-xl bg-emerald-950/40 p-3">
+              <h3 class="text-sm font-semibold text-emerald-100 mb-2">SELECT umumiy shakli</h3>
+<pre class="bg-black/40 border border-emerald-500/40 rounded-lg p-2 overflow-auto text-emerald-50"><code>SELECT    ustunlar
+FROM      jadval
+WHERE     shartlar
+GROUP BY  guruh_ustunlar
+HAVING    guruhlashdan_keyingi_shart
+ORDER BY  tartib_ustunlar
+LIMIT     n OFFSET m;</code></pre>
+              <p class="mt-2 text-[11px] text-emerald-100/80">
+                Amalda bu bo'limlarning barchasi bir so'rovda bo'lavermaydi. Ko'pincha <span class="font-semibold">SELECT/FROM</span>
+                va kerak bo'lsa <span class="font-semibold">WHERE/ORDER BY/LIMIT</span> bilan boshlaysiz.
+              </p>
+            </div>
+            <div class="border border-emerald-400/40 rounded-xl bg-emerald-950/40 p-3">
+              <h3 class="text-sm font-semibold text-emerald-100 mb-2">Oddiy SELECT misollari</h3>
+<pre class="bg-black/40 border border-emerald-500/40 rounded-lg p-2 overflow-auto text-emerald-50"><code>-- Barcha ustunlar
+SELECT *
+FROM students;
+
+-- Faqat kerakli ustunlar
+SELECT id, full_name, gpa
+FROM students;
+
+-- Tartiblash
+SELECT id, full_name, gpa
+FROM students
+ORDER BY gpa DESC, full_name ASC;
+
+-- Eng yaxshi 10 talaba
+SELECT id, full_name, gpa
+FROM students
+WHERE gpa >= 3.0
+ORDER BY gpa DESC
+LIMIT 10;</code></pre>
+            </div>
+          </div>
+
+          <div class="space-y-3 text-[13px] md:text-sm text-emerald-50/95">
+            <h3 class="text-sm font-semibold text-emerald-200/90">SELECT ning mantiqiy bajarilish tartibi</h3>
+            <ol class="list-decimal list-inside space-y-1">
+              <li><span class="font-semibold">FROM</span> (+JOIN) — qaysi jadvallardan ma'lumot olinadi.</li>
+              <li><span class="font-semibold">WHERE</span> — qatorlar bo'yicha dastlabki filtr.</li>
+              <li><span class="font-semibold">GROUP BY</span> — guruhlash.</li>
+              <li><span class="font-semibold">HAVING</span> — guruhlar bo'yicha filtr.</li>
+              <li><span class="font-semibold">SELECT</span> — qaysi ustunlar ko'rinishi.</li>
+              <li><span class="font-semibold">DISTINCT</span> — dublikatlarni olib tashlash.</li>
+              <li><span class="font-semibold">ORDER BY</span> — tartiblash.</li>
+              <li><span class="font-semibold">LIMIT/OFFSET</span> — cheklash.</li>
+            </ol>
+            <p>
+              Yozilish tartibi boshqa bo'lsa ham, <span class="font-semibold">optimallashtirish va xatolarni tushunish</span> uchun
+              mantiqiy bajarilish tartibini yodda saqlash muhim.
+            </p>
+            <div class="border border-emerald-400/30 rounded-xl bg-emerald-500/5 p-3 text-[11px] md:text-xs text-emerald-50">
+              <p class="font-semibold mb-1">Eslatma:</p>
+              <p>SELECT * dan ehtiyot bo'ling. Keraksiz ustunlar tarmoqqa chiqadi, indexlardan to'g'ri foydalanmaslikka olib kelishi mumkin.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. WHERE VA FILTRLASH -->
+    <section id="where" class="scroll-mt-24">
+      <div class="rounded-3xl border border-emerald-500/40 bg-gradient-to-br from-emerald-950/80 via-slate-950 to-slate-950 p-5 md:p-7 space-y-6">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-emerald-400/20 border border-emerald-300/60 text-[11px] font-bold text-emerald-100">3</span>
+              WHERE bilan filtrlash — aniq ma'lumotni ajratib olish
+            </h2>
+            <p class="text-xs md:text-[13px] text-emerald-100/80 mt-1 max-w-2xl">
+              Katta jadvalda minglab satr bo'ladi. WHERE bilan to'g'ri filtrlash — analitik ishning asosiy qismidir.
+              Mantiqiy operatorlar, LIKE, IN/BETWEEN va NULL bilan ishlashni puxta o'rganish kerak.
+            </p>
+          </div>
+          <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full border border-emerald-400/60 bg-emerald-500/10 text-[11px] font-medium text-emerald-100">WHERE · LIKE · IN · NULL</span>
+        </div>
+
+        <div class="grid lg:grid-cols-[1.1fr,1.9fr] gap-6 items-start">
+          <div class="space-y-3 text-[13px] md:text-sm text-emerald-50/95">
+            <h3 class="text-sm font-semibold text-emerald-200/90">Oddiy WHERE dan murakkab filtrgacha</h3>
+            <details class="border border-emerald-400/30 bg-emerald-950/40 rounded-xl" open>
+              <summary class="px-3 py-2 cursor-pointer select-none text-emerald-100 text-xs font-semibold border-b border-emerald-400/20">Oddiy taqqoslash</summary>
+<pre class="px-3 py-2 bg-black/40 text-[11px] text-emerald-50 overflow-auto"><code>-- CS-01 guruhidagi talabalar
+SELECT id, full_name, group_code
+FROM students
+WHERE group_code = 'CS-01';
+
+-- GPA si 3.5 dan yuqori talabalar
+SELECT full_name, gpa
+FROM students
+WHERE gpa >= 3.5;</code></pre>
+            </details>
+            <details class="border border-emerald-400/30 bg-emerald-950/40 rounded-xl">
+              <summary class="px-3 py-2 cursor-pointer select-none text-emerald-100 text-xs font-semibold border-b border-emerald-400/20">AND/OR/NOT bilan kombinatsiya</summary>
+<pre class="px-3 py-2 bg-black/40 text-[11px] text-emerald-50 overflow-auto"><code>-- Kuchli va ma'lum guruhlardagi talabalar
+SELECT full_name, group_code, gpa
+FROM students
+WHERE gpa >= 3.5
+  AND group_code IN ('CS-01', 'CS-02');
+
+-- Yomon emas (GPA 2 dan past emas)
+SELECT full_name, gpa
+FROM students
+WHERE NOT (gpa < 2.0);</code></pre>
+            </details>
+            <details class="border border-emerald-400/30 bg-emerald-950/40 rounded-xl">
+              <summary class="px-3 py-2 cursor-pointer select-none text-emerald-100 text-xs font-semibold border-b border-emerald-400/20">NULL bilan ishlash</summary>
+<pre class="px-3 py-2 bg-black/40 text-[11px] text-emerald-50 overflow-auto"><code>-- Hali GPA qo'yilmagan talabalar
+SELECT id, full_name
+FROM students
+WHERE gpa IS NULL;
+
+-- GPA mavjud bo'lganlar
+SELECT id, full_name, gpa
+FROM students
+WHERE gpa IS NOT NULL;</code></pre>
+            </details>
+          </div>
+
+          <div class="border border-emerald-400/30 rounded-2xl bg-emerald-950/60 p-4 md:p-5 space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <p class="text-[11px] uppercase tracking-wide text-emerald-300 font-semibold">WHERE bo'yicha neon eslatmalar</p>
+              <p class="text-[10px] text-emerald-200/80">Tugmani bosing</p>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-[11px] mb-1">
+              <button data-op="COMPARE" class="sql-filter-btn px-3 py-2 rounded-lg border border-emerald-400/40 bg-emerald-950/80 text-emerald-50 font-semibold hover:border-emerald-300/80">Taqqoslash</button>
+              <button data-op="LOGICAL" class="sql-filter-btn px-3 py-2 rounded-lg border border-emerald-400/40 bg-emerald-950/80 text-emerald-50 font-semibold hover:border-emerald-300/80">AND/OR</button>
+              <button data-op="LIKE" class="sql-filter-btn px-3 py-2 rounded-lg border border-emerald-400/40 bg-emerald-950/80 text-emerald-50 font-semibold hover:border-emerald-300/80">LIKE</button>
+              <button data-op="BETWEEN_IN" class="sql-filter-btn px-3 py-2 rounded-lg border border-emerald-400/40 bg-emerald-950/80 text-emerald-50 font-semibold hover:border-emerald-300/80">BETWEEN/IN</button>
+              <button data-op="NULL" class="sql-filter-btn px-3 py-2 rounded-lg border border-emerald-400/40 bg-emerald-950/80 text-emerald-50 font-semibold hover:border-emerald-300/80">NULL</button>
+              <button data-op="ORDER_LIMIT" class="sql-filter-btn px-3 py-2 rounded-lg border border-emerald-400/40 bg-emerald-950/80 text-emerald-50 font-semibold hover:border-emerald-300/80">ORDER/LIMIT</button>
+            </div>
+            <div class="space-y-2 text-[13px]">
+              <h4 id="filter-op-name" class="text-sm font-semibold text-emerald-50">Oddiy taqqoslash operatorlari</h4>
+              <p id="filter-op-description" class="text-emerald-50/90 text-[12px]">
+                =, !=, >, >= kabi operatorlar bilan aniq qiymat yoki oraliq bo'yicha filtrlash mumkin.
+              </p>
+              <div>
+                <p class="text-[11px] font-semibold text-emerald-200 mb-1">Kod namunasi:</p>
+<pre id="filter-op-example" class="text-[11px] bg-black/40 border border-emerald-400/40 rounded-lg p-2 overflow-auto text-emerald-50"><code>-- GPA >= 3.5 bo'lgan talabalar
+SELECT id, full_name, gpa
+FROM students
+WHERE gpa >= 3.5;</code></pre>
+              </div>
+              <p id="filter-op-tip" class="text-[11px] text-emerald-200/90">
+                Maslahat: WHERE shartlarida har doim <span class="font-semibold">qavs</span>lardan foydalanib,
+                murakkab AND/OR kombinatsiyalarini aniq qilib yozing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. JOINLAR -->
+    <section id="joins" class="scroll-mt-24">
+      <div class="rounded-3xl border border-violet-500/40 bg-gradient-to-br from-violet-950/80 via-slate-950 to-slate-950 p-5 md:p-7 space-y-6">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-violet-400/20 border border-violet-300/60 text-[11px] font-bold text-violet-100">4</span>
+              JOINlar — bir nechta jadvalni bog'lash
+            </h2>
+            <p class="text-xs md:text-[13px] text-violet-100/80 mt-1 max-w-2xl">
+              Normalizatsiya qilingan bazada ma'lumot ko'pincha bir nechta jadvalga bo'linadi. 
+              <span class="font-semibold">JOIN</span> lar yordamida ularni bir so'rovda birlashtiramiz.
+            </p>
+          </div>
+          <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full border border-violet-400/60 bg-violet-500/10 text-[11px] font-medium text-violet-100">INNER · LEFT · RIGHT · FULL · CROSS</span>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 items-start">
+          <div class="space-y-3 text-[13px] md:text-sm text-violet-50/95">
+            <h3 class="text-sm font-semibold text-violet-200/90">JOIN turlari va mantiqi</h3>
+            <ul class="list-disc list-inside space-y-1">
+              <li><span class="font-semibold">INNER JOIN</span> — ikkala jadvalda ham ON shartiga mos keladigan satrlar.</li>
+              <li><span class="font-semibold">LEFT JOIN</span> — chap jadvaldagi barcha satrlar, o'ngda mos bo'lmasa NULL.</li>
+              <li><span class="font-semibold">RIGHT JOIN</span> — LEFT ning aksi.</li>
+              <li><span class="font-semibold">FULL OUTER JOIN</span> — ikkala tomondagi barcha satrlar, mos bo'lganda birlashtiriladi.</li>
+              <li><span class="font-semibold">CROSS JOIN</span> — Dekart ko'paytma, har bir satr har bir satr bilan juftlashadi.</li>
+            </ul>
+            <div class="border border-violet-400/40 bg-violet-500/5 rounded-xl p-3 text-[11px] md:text-xs text-violet-50 space-y-1">
+              <p class="font-semibold text-violet-200">Talabalar va kurslar misoli</p>
+<pre class="bg-black/40 border border-violet-500/40 rounded-lg p-2 overflow-auto"><code>SELECT s.full_name, c.title, e.grade
+FROM enrollments e
+JOIN students   s ON s.id = e.student_id
+JOIN courses    c ON c.id = e.course_id;</code></pre>
+              <p class="text-[11px] text-violet-100/80">ON bo'limida har doim <span class="font-semibold">kalit ustunlar</span> bo'yicha join qilishga harakat qiling (id lar).</p>
+            </div>
+          </div>
+
+          <div class="border border-violet-400/30 rounded-2xl bg-violet-950/60 p-4 md:p-5 space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <p class="text-[11px] uppercase tracking-wide text-violet-300 font-semibold">JOIN bo'yicha neon eslatmalar</p>
+              <p class="text-[10px] text-violet-200/80">JOIN turini tanlang</p>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-[11px] mb-1">
+              <button data-op="INNER" class="sql-join-btn px-3 py-2 rounded-lg border border-violet-400/40 bg-violet-950/80 text-violet-50 font-semibold hover:border-violet-300/80">INNER</button>
+              <button data-op="LEFT" class="sql-join-btn px-3 py-2 rounded-lg border border-violet-400/40 bg-violet-950/80 text-violet-50 font-semibold hover:border-violet-300/80">LEFT</button>
+              <button data-op="RIGHT" class="sql-join-btn px-3 py-2 rounded-lg border border-violet-400/40 bg-violet-950/80 text-violet-50 font-semibold hover:border-violet-300/80">RIGHT</button>
+              <button data-op="FULL" class="sql-join-btn px-3 py-2 rounded-lg border border-violet-400/40 bg-violet-950/80 text-violet-50 font-semibold hover:border-violet-300/80">FULL</button>
+              <button data-op="CROSS" class="sql-join-btn px-3 py-2 rounded-lg border border-violet-400/40 bg-violet-950/80 text-violet-50 font-semibold hover:border-violet-300/80">CROSS</button>
+              <button data-op="SELF" class="sql-join-btn px-3 py-2 rounded-lg border border-violet-400/40 bg-violet-950/80 text-violet-50 font-semibold hover:border-violet-300/80">SELF</button>
+            </div>
+            <div class="space-y-2 text-[13px]">
+              <h4 id="join-op-name" class="text-sm font-semibold text-violet-50">INNER JOIN — faqat mos keladigan satrlar</h4>
+              <p id="join-op-description" class="text-violet-50/90 text-[12px]">
+                INNER JOIN ikkala jadvalda ham ON shartiga mos keladigan satrlarni qaytaradi.
+              </p>
+              <div>
+                <p class="text-[11px] font-semibold text-violet-200 mb-1">Kod namunasi:</p>
+<pre id="join-op-example" class="text-[11px] bg-black/40 border border-violet-400/40 rounded-lg p-2 overflow-auto text-violet-50"><code>SELECT s.full_name, c.title, e.grade
+FROM enrollments e
+INNER JOIN students s ON s.id = e.student_id
+INNER JOIN courses  c ON c.id = e.course_id;</code></pre>
+              </div>
+              <p id="join-op-tip" class="text-[11px] text-violet-200/90">
+                Maslahat: ON shartlarida har doim <span class="font-semibold">jadval_alias.ustun</span> ko'rinishidan foydalaning.
+                Bu chalkashlik va xatolarni kamaytiradi.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-2 text-[13px] md:text-sm text-violet-50/90">
+          <h3 class="text-sm font-semibold text-violet-200/90">JOINlarni vizual tasavvur qilish</h3>
+          <p>JOINlarni Venn diagrammalarga o'xshatish foydali: har bir jadval — doira, INNER JOIN — kesishma,
+            LEFT JOIN — chap doira butunlay, o'ng doira qismiga mos joylar to'ldiriladi.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. GROUP BY VA AGREGATSIYA -->
+    <section id="agg" class="scroll-mt-24">
+      <div class="rounded-3xl border border-amber-500/40 bg-gradient-to-br from-amber-950/80 via-slate-950 to-slate-950 p-5 md:p-7 space-y-6">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-amber-400/20 border border-amber-300/60 text-[11px] font-bold text-amber-100">5</span>
+              GROUP BY va agregatsiya — statistik tahlil uchun
+            </h2>
+            <p class="text-xs md:text-[13px] text-amber-100/80 mt-1 max-w-2xl">
+              COUNT, SUM, AVG, MIN, MAX kabi agregat funksiyalar ma'lumotni guruhlar bo'yicha xulosa qilishga imkon beradi.
+            </p>
+          </div>
+          <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full border border-amber-400/60 bg-amber-500/10 text-[11px] font-medium text-amber-100">COUNT · SUM · AVG · HAVING</span>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 items-start text-[11px] md:text-xs">
+          <div class="space-y-3">
+            <div class="border border-amber-400/40 rounded-xl bg-amber-950/40 p-3">
+              <h3 class="text-sm font-semibold text-amber-100 mb-2">Agregat funksiyalar</h3>
+<pre class="bg-black/40 border border-amber-500/40 rounded-lg p-2 overflow-auto text-amber-50"><code>-- Har bir kurs bo'yicha talabalar soni
+SELECT c.title, COUNT(*) AS student_count
+FROM enrollments e
+JOIN courses c ON c.id = e.course_id
+GROUP BY c.title
+ORDER BY student_count DESC;</code></pre>
+              <p class="mt-2 text-[11px] text-amber-100/80">
+                GROUP BY ishlaganda, SELECT da faqat GROUP BY da ko'rsatilgan ustunlar yoki agregat funksiyalar bo'lishi kerak.
+              </p>
+            </div>
+            <div class="border border-amber-400/40 rounded-xl bg-amber-950/40 p-3">
+              <h3 class="text-sm font-semibold text-amber-100 mb-2">HAVING vs WHERE</h3>
+<pre class="bg-black/40 border border-amber-500/40 rounded-lg p-2 overflow-auto text-amber-50"><code>-- Har bir guruh bo'yicha o'rtacha GPA
+-- faqat o'rtacha 3.5 dan katta bo'lgan guruhlar
+SELECT group_code, AVG(gpa) AS avg_gpa
+FROM students
+WHERE gpa IS NOT NULL
+GROUP BY group_code
+HAVING AVG(gpa) >= 3.5
+ORDER BY avg_gpa DESC;</code></pre>
+              <p class="mt-2 text-[11px] text-amber-100/80">
+                WHERE — guruhlashdan oldin qatorlar bo'yicha filtr.
+                HAVING — guruhlashdan keyin agregat bo'yicha filtr.
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-3 text-[13px] md:text-sm text-amber-50/95">
+            <h3 class="text-sm font-semibold text-amber-200/90">Ko'p ustunli GROUP BY</h3>
+<pre class="bg-black/40 border border-amber-500/40 rounded-lg p-2 overflow-auto text-[11px] text-amber-50"><code>-- Yil va guruh bo'yicha o'rtacha GPA
+SELECT
+    EXTRACT(YEAR FROM enrolled_at) AS year,
+    s.group_code,
+    AVG(e.grade) AS avg_grade,
+    COUNT(*)     AS cnt
+FROM enrollments e
+JOIN students   s ON s.id = e.student_id
+GROUP BY year, s.group_code
+ORDER BY year DESC, avg_grade DESC;</code></pre>
+            <p>
+              Bir nechta ustun bo'yicha GROUP BY qilganda, har bir kombinatsiya alohida guruh hisoblanadi.
+              Statistik hisobotlar aksariyati aynan shu tamoyil asosida tuziladi.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. SUBQUERY, CTE, WINDOW -->
+    <section id="subqueries" class="scroll-mt-24">
+      <div class="rounded-3xl border border-rose-500/40 bg-gradient-to-br from-rose-950/80 via-slate-950 to-slate-950 p-5 md:p-7 space-y-6">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-rose-400/20 border border-rose-300/60 text-[11px] font-bold text-rose-100">6</span>
+              Subquery, CTE (WITH) va window funksiyalar
+            </h2>
+            <p class="text-xs md:text-[13px] text-rose-100/80 mt-1 max-w-2xl">
+              Murakkab hisobotlar uchun subquery va window funksiyalarini bilish shart. Ular yordamida
+              bir necha bosqichli hisob-kitoblarni <span class="font-semibold">bitta so'rov</span> ichida bajarish mumkin.
+            </p>
+          </div>
+          <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full border border-rose-400/60 bg-rose-500/10 text-[11px] font-medium text-rose-100">IN · EXISTS · CTE · ROW_NUMBER</span>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-6 items-start text-[11px] md:text-xs">
+          <div class="space-y-3">
+            <div class="border border-rose-400/40 rounded-xl bg-rose-950/40 p-3">
+              <h3 class="text-sm font-semibold text-rose-100 mb-2">IN va EXISTS bilan subquery</h3>
+<pre class="bg-black/40 border border-rose-500/40 rounded-lg p-2 overflow-auto text-rose-50"><code>-- Faqat 'Ma'lumotlar bazasi' kursidan bahosi bor talabalar
+SELECT full_name
+FROM students
+WHERE id IN (
+    SELECT DISTINCT student_id
+    FROM enrollments e
+    JOIN courses c ON c.id = e.course_id
+    WHERE c.title = 'Ma''lumotlar bazasi'
+);
+
+-- Hech bo'lmaganda bitta kurs olgan talabalar
+SELECT s.id, s.full_name
+FROM students s
+WHERE EXISTS (
+    SELECT 1
+    FROM enrollments e
+    WHERE e.student_id = s.id
+);</code></pre>
+            </div>
+            <div class="border border-rose-400/40 rounded-xl bg-rose-950/40 p-3">
+              <h3 class="text-sm font-semibold text-rose-100 mb-2">CTE (WITH) bilan o'qilishi oson so'rovlar</h3>
+<pre class="bg-black/40 border border-rose-500/40 rounded-lg p-2 overflow-auto text-rose-50"><code>WITH high_gpa AS (
+    SELECT id, full_name, gpa
+    FROM students
+    WHERE gpa >= 3.5
+)
+SELECT *
+FROM high_gpa
+ORDER BY gpa DESC;</code></pre>
+              <p class="mt-2 text-[11px] text-rose-100/80">
+                CTE — murakkab subquerylarni yuqoriga chiqarib, so'rovni modulli va tushunarli qiladi.
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="border border-rose-400/40 rounded-xl bg-rose-950/40 p-3">
+              <h3 class="text-sm font-semibold text-rose-100 mb-2">Window funksiyalar (OVER)</h3>
+<pre class="bg-black/40 border border-rose-500/40 rounded-lg p-2 overflow-auto text-rose-50"><code>-- Har bir guruh ichida GPA bo'yicha reyting
+SELECT
+    id,
+    full_name,
+    group_code,
+    gpa,
+    RANK() OVER (
+        PARTITION BY group_code
+        ORDER BY gpa DESC
+    ) AS rank_in_group
+FROM students
+WHERE gpa IS NOT NULL
+ORDER BY group_code, rank_in_group;</code></pre>
+              <p class="mt-2 text-[11px] text-rose-100/80">
+                Window funksiyalar <span class="font-semibold">guruhlamasdan</span> turib kontekst bo'yicha agregatsiya qilishga imkon beradi.
+                Masalan: har satr uchun umumiy summa, slayding o'rtacha va hokazo.
+              </p>
+            </div>
+            <div class="border border-rose-400/30 rounded-xl bg-rose-500/5 p-3 text-[11px] md:text-xs text-rose-50">
+              <p class="font-semibold mb-1">Window funksiyalariga misollar:</p>
+<pre class="bg-black/40 border border-rose-500/40 rounded-lg p-2 overflow-auto"><code>-- Barcha talabalar bo'yicha umumiy tartib
+ROW_NUMBER() OVER (ORDER BY gpa DESC)
+
+-- Har bir guruh bo'yicha o'rtacha GPA ni satrga qo'shish
+AVG(gpa) OVER (PARTITION BY group_code)</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SCHEMA VA INDEXLAR -->
+    <section id="schema" class="scroll-mt-24">
+      <div class="rounded-3xl border border-cyan-500/40 bg-gradient-to-br from-cyan-950/80 via-slate-950 to-slate-950 p-5 md:p-7 space-y-6">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-cyan-400/20 border border-cyan-300/60 text-[11px] font-bold text-cyan-100">7</span>
+              Schema dizayni, cheklovlar va indexlar
+            </h2>
+            <p class="text-xs md:text-[13px] text-cyan-100/80 mt-1 max-w-2xl">
+              Yaxshi SQL — bu faqat SELECT emas. Jadval dizayni, PK/FK, cheklovlar va indexlar 
+              <span class="font-semibold">ishlash tezligi</span> va <span class="font-semibold">ma'lumot sifati</span>ni belgilaydi.
+            </p>
+          </div>
+          <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full border border-cyan-400/60 bg-cyan-500/10 text-[11px] font-medium text-cyan-100">PRIMARY KEY · FOREIGN KEY · INDEX</span>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 items-start text-[11px] md:text-xs">
+          <div class="space-y-3">
+            <div class="border border-cyan-400/40 rounded-xl bg-cyan-950/40 p-3">
+              <h3 class="text-sm font-semibold text-cyan-100 mb-2">CREATE TABLE va cheklovlar</h3>
+<pre class="bg-black/40 border border-cyan-500/40 rounded-lg p-2 overflow-auto text-cyan-50"><code>CREATE TABLE students (
+    id          SERIAL PRIMARY KEY,
+    full_name   VARCHAR(100) NOT NULL,
+    group_code  VARCHAR(20)  NOT NULL,
+    gpa         NUMERIC(3,2) CHECK (gpa >= 0 AND gpa <= 4.5)
+);
+
+CREATE TABLE courses (
+    id          SERIAL PRIMARY KEY,
+    code        VARCHAR(20)  UNIQUE NOT NULL,
+    title       VARCHAR(100) NOT NULL,
+    credits     INT          NOT NULL CHECK (credits > 0)
+);
+
+CREATE TABLE enrollments (
+    student_id  INT NOT NULL REFERENCES students(id),
+    course_id   INT NOT NULL REFERENCES courses(id),
+    grade       NUMERIC(3,1),
+    enrolled_at TIMESTAMP DEFAULT now(),
+    PRIMARY KEY (student_id, course_id)
+);</code></pre>
+              <p class="mt-2 text-[11px] text-cyan-100/80">
+                <span class="font-semibold">CHECK, NOT NULL, UNIQUE, FOREIGN KEY</span> kabi cheklovlar ma'lumot sifatini avtomatik nazorat qiladi.
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="border border-cyan-400/40 rounded-xl bg-cyan-950/40 p-3">
+              <h3 class="text-sm font-semibold text-cyan-100 mb-2">Indexlar va EXPLAIN</h3>
+<pre class="bg-black/40 border border-cyan-500/40 rounded-lg p-2 overflow-auto text-cyan-50"><code>-- group_code ustuniga index qo'yish
+CREATE INDEX idx_students_group
+    ON students(group_code);
+
+-- Kombinatsiyalangan index
+CREATE INDEX idx_enrollments_student_course
+    ON enrollments(student_id, course_id);
+
+-- So'rovni tahlil qilish (PostgreSQL)
+EXPLAIN ANALYZE
+SELECT *
+FROM students
+WHERE group_code = 'CS-01';</code></pre>
+              <p class="mt-2 text-[11px] text-cyan-100/80">
+                Indexlar qidirish va JOINlarni tezlashtiradi, lekin yozish (INSERT/UPDATE/DELETE) ni biroz sekinlashtiradi.
+                Shuning uchun <span class="font-semibold">faqat zarur ustunlar</span> uchun index qo'ying.
+              </p>
+            </div>
+            <div class="border border-cyan-400/30 rounded-xl bg-cyan-500/5 p-3 text-[11px] md:text-xs text-cyan-50">
+              <p class="font-semibold mb-1">Yaxshi amaliyotlar:</p>
+              <ul class="list-disc list-inside space-y-0.5">
+                <li>Har bir jadvalga PRIMARY KEY belgilang.</li>
+                <li>Aloqalar uchun FOREIGN KEY ishlating, qo'lda id yozmay.</li>
+                <li>SELECT * o'rniga faqat kerakli ustunlarni oling.</li>
+                <li>Ko'p ishlatiladigan WHERE/JOIN ustunlariga index qo'yishni o'ylab ko'ring.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. TRANSACTION VA ACID -->
+    <section id="tx" class="scroll-mt-24">
+      <div class="rounded-3xl border border-fuchsia-500/40 bg-gradient-to-br from-fuchsia-950/80 via-slate-950 to-slate-950 p-5 md:p-7 space-y-6">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-fuchsia-400/20 border border-fuchsia-300/60 text-[11px] font-bold text-fuchsia-100">8</span>
+              Transactionlar va ACID xususiyatlari
+            </h2>
+            <p class="text-xs md:text-[13px] text-fuchsia-100/80 mt-1 max-w-2xl">
+              Production darajadagi backendlar uchun transaction va ACID ni tushunish zarur. Bir necha so'rovni
+              bitta <span class="font-semibold">atomik</span> operatsiya sifatida bajarish imkonini beradi.
+            </p>
+          </div>
+          <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full border border-fuchsia-400/60 bg-fuchsia-500/10 text-[11px] font-medium text-fuchsia-100">BEGIN · COMMIT · ROLLBACK</span>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 items-start text-[11px] md:text-xs">
+          <div class="space-y-3">
+            <div class="border border-fuchsia-400/40 rounded-xl bg-fuchsia-950/40 p-3">
+              <h3 class="text-sm font-semibold text-fuchsia-100 mb-2">Oddiy transaction misoli</h3>
+<pre class="bg-black/40 border border-fuchsia-500/40 rounded-lg p-2 overflow-auto text-fuchsia-50"><code>BEGIN;
+
+UPDATE accounts
+SET balance = balance - 100
+WHERE id = 1;
+
+UPDATE accounts
+SET balance = balance + 100
+WHERE id = 2;
+
+COMMIT;  -- yoki xato bo'lsa ROLLBACK;</code></pre>
+              <p class="mt-2 text-[11px] text-fuchsia-100/80">
+                Har ikkala UPDATE ham muvaffaqiyatli bajarilsa COMMIT qilinadi. Biri xato bo'lsa, ROLLBACK
+                bilan ikkalasi ham bekor qilinadi — bu <span class="font-semibold">Atomicity</span>.
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="border border-fuchsia-400/40 rounded-xl bg-fuchsia-950/40 p-3">
+              <h3 class="text-sm font-semibold text-fuchsia-100 mb-2">ACID qisqacha</h3>
+              <ul class="list-disc list-inside text-fuchsia-50 space-y-1.5">
+                <li><span class="font-semibold">Atomicity</span> — transaction yoki to'liq bajariladi, yoki umuman yo'q (bo'lib qolmaydi).</li>
+                <li><span class="font-semibold">Consistency</span> — transactionlardan oldin va keyin ma'lumotlar bazasi cheklovlarga mos bo'lib qoladi.</li>
+                <li><span class="font-semibold">Isolation</span> — parallel transactionlar bir-biriga minimal ta'sir qiladi.</li>
+                <li><span class="font-semibold">Durability</span> — COMMIT dan keyin ma'lumotlar diskda saqlanadi (server o'chsa ham yo'qolmaydi).</li>
+              </ul>
+            </div>
+            <div class="border border-fuchsia-400/30 rounded-xl bg-fuchsia-500/5 p-3 text-[11px] md:text-xs text-fuchsia-50">
+              <p class="font-semibold mb-1">Isolation level lar:</p>
+              <p>PostgreSQL/MySQL da READ COMMITTED, REPEATABLE READ, SERIALIZABLE kabi levellar mavjud. Dirty read,
+                non-repeatable read va phantom read kabi muammolarni nazorat qilishga yordam beradi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="scroll-mt-24 mb-10">
+      <div class="rounded-3xl border border-amber-500/40 bg-gradient-to-br from-amber-950/80 via-slate-950 to-slate-950 p-5 md:p-7 space-y-5">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl md:text-2xl font-semibold tracking-tight flex items-center gap-2">
+              <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-amber-400/20 border border-amber-300/60 text-[11px] font-bold text-amber-100">Test</span>
+              Qisqa test — SQL bo'yicha o'zingizni sinab ko'ring
+            </h2>
+            <p class="text-xs md:text-[13px] text-amber-100/80 mt-1 max-w-2xl">
+              10 ta savol: SELECT, WHERE, JOIN, GROUP BY, subquery, window, schema va transaction bo'yicha.
+            </p>
+          </div>
+          <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full border border-amber-400/60 bg-amber-500/10 text-[11px] font-medium text-amber-100">Nazariyani mustahkamlash</span>
+        </div>
+
+        <div class="space-y-3 text-[13px] md:text-sm">
+          <!-- Q1 SELECT * -->
+          <div class="space-y-1" data-question="1">
+            <p class="font-semibold">1. Qaysi yondashuv yaxshi amaliyotga ko'proq mos keladi?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q1" value="q1_all" class="text-amber-500" /> Har doim SELECT * yozish</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q1" value="q1_needed" class="text-amber-500" /> Faqat kerakli ustunlarni SELECT da ko'rsatish</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q1" value="q1_random" class="text-amber-500" /> Har safar tasodifiy ustunlarni tanlash</label>
+            <p class="text-[11px] mt-1" id="feedback-1"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q2 WHERE vs HAVING -->
+          <div class="space-y-1" data-question="2">
+            <p class="font-semibold">2. WHERE va HAVING farqi nimada?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q2" value="q2_a" class="text-amber-500" /> WHERE faqat agregat funksiyalar bilan ishlatiladi, HAVING esa oddiy ustunlar bilan</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q2" value="q2_b" class="text-amber-500" /> WHERE guruhlashdan oldin qatorlarni filtrlaydi, HAVING esa guruhlashdan keyin agregat bo'yicha filtrlaydi</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q2" value="q2_c" class="text-amber-500" /> Ular bir xil, farqi yo'q</label>
+            <p class="text-[11px] mt-1" id="feedback-2"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q3 INNER JOIN -->
+          <div class="space-y-1" data-question="3">
+            <p class="font-semibold">3. INNER JOIN nimani qaytaradi?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q3" value="q3_a" class="text-amber-500" /> Faqat chap jadvaldagi barcha satrlar</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q3" value="q3_b" class="text-amber-500" /> Faqat ikkala jadvalda ham ON shartiga mos keladigan satrlar</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q3" value="q3_c" class="text-amber-500" /> Faqat o'ng jadvaldagi barcha satrlar</label>
+            <p class="text-[11px] mt-1" id="feedback-3"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q4 IN vs EXISTS -->
+          <div class="space-y-1" data-question="4">
+            <p class="font-semibold">4. IN va EXISTS o'rtasidagi asosiy farq nimada?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q4" value="q4_a" class="text-amber-500" /> IN va EXISTS faqat bitta ustunli subquery bilan ishlaydi</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q4" value="q4_b" class="text-amber-500" /> IN odatda qiymatlar ro'yxati bilan, EXISTS esa satr mavjudligini tekshirish bilan ishlaydi</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q4" value="q4_c" class="text-amber-500" /> Subquery faqat FROM bo'limida yoziladi</label>
+            <p class="text-[11px] mt-1" id="feedback-4"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q5 GROUP BY -->
+          <div class="space-y-1" data-question="5">
+            <p class="font-semibold">5. GROUP BY ishlatilayotganda SELECTda qanday ustunlar bo'lishi kerak?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q5" value="q5_a" class="text-amber-500" /> Istalgan ustunlar, farqi yo'q</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q5" value="q5_b" class="text-amber-500" /> Faqat GROUP BY da ko'rsatilgan ustunlar yoki agregat funksiyalar</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q5" value="q5_c" class="text-amber-500" /> Faqat primary key ustuni</label>
+            <p class="text-[11px] mt-1" id="feedback-5"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q6 INDEX -->
+          <div class="space-y-1" data-question="6">
+            <p class="font-semibold">6. Indexning asosiy vazifasi nima?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q6" value="q6_a" class="text-amber-500" /> Qatorlarni avtomatik o'chirib turish</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q6" value="q6_b" class="text-amber-500" /> Qidirish va JOIN so'rovlarini tezlashtirish</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q6" value="q6_c" class="text-amber-500" /> Bazani zaxira nusxasini yaratish</label>
+            <p class="text-[11px] mt-1" id="feedback-6"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q7 NULL -->
+          <div class="space-y-1" data-question="7">
+            <p class="font-semibold">7. NULL qiymatni tekshirish uchun qaysi sintaksis to'g'ri?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q7" value="q7_a" class="text-amber-500" /> gpa = NULL</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q7" value="q7_b" class="text-amber-500" /> gpa IS NULL</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q7" value="q7_c" class="text-amber-500" /> gpa == NULL</label>
+            <p class="text-[11px] mt-1" id="feedback-7"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q8 ORDER/LIMIT -->
+          <div class="space-y-1" data-question="8">
+            <p class="font-semibold">8. Eng yuqori GPA ga ega 5 nafar talabani olish uchun qaysi buyruq qismlari kerak?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q8" value="q8_a" class="text-amber-500" /> Faqat WHERE</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q8" value="q8_b" class="text-amber-500" /> ORDER BY gpa DESC va LIMIT 5</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q8" value="q8_c" class="text-amber-500" /> GROUP BY gpa</label>
+            <p class="text-[11px] mt-1" id="feedback-8"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q9 WINDOW -->
+          <div class="space-y-1" data-question="9">
+            <p class="font-semibold">9. RANK() OVER (PARTITION BY group_code ORDER BY gpa DESC) nima qiladi?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q9" value="q9_a" class="text-amber-500" /> Har bir guruh bo'yicha talabalarni GPA ga qarab reytinglaydi</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q9" value="q9_b" class="text-amber-500" /> Barcha guruhlarni aralashtirib, umumiy reyting beradi</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q9" value="q9_c" class="text-amber-500" /> Faqat minimal GPA ni hisoblaydi</label>
+            <p class="text-[11px] mt-1" id="feedback-9"></p>
+          </div>
+          <hr class="border-amber-500/30" />
+
+          <!-- Q10 PK -->
+          <div class="space-y-1" data-question="10">
+            <p class="font-semibold">10. PRIMARY KEY uchun to'g'ri ta'rif qaysi?</p>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q10" value="q10_a" class="text-amber-500" /> Jadvaldagi istalgan ustunlar to'plami, takrorlansa ham bo'ladi</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q10" value="q10_b" class="text-amber-500" /> Jadvaldagi har bir qatorni noyob aniqlaydigan ustun yoki ustunlar to'plami</label>
+            <label class="flex items-center gap-2 text-[12px] cursor-pointer"><input type="radio" name="q10" value="q10_c" class="text-amber-500" /> Faqat matn (TEXT) turidagi ustunlar</label>
+            <p class="text-[11px] mt-1" id="feedback-10"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <button id="check-quiz" class="px-4 py-2 rounded-lg bg-amber-500 text-slate-950 text-xs font-semibold hover:bg-amber-400">Javoblarni tekshirish</button>
+          <p id="quiz-result" class="text-[11px] text-amber-100"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 bg-slate-950/90">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-[11px] text-slate-500">
+      <p>Saddam Teacher — SQL va ma'lumotlar bazasi (SELECT, WHERE, JOIN, GROUP BY, subquery, window, transaction, index) bo'yicha chuqur neon qo'llanma.</p>
+      <p class="flex flex-wrap gap-2 items-center">
+        <a href="https://www.postgresql.org/docs/" target="_blank" class="text-cyan-300 hover:text-cyan-200">PostgreSQL docs</a>
+        <span class="text-slate-600">·</span>
+        <a href="https://dev.mysql.com/doc/" target="_blank" class="text-emerald-300 hover:text-emerald-200">MySQL docs</a>
+        <span class="text-slate-600">·</span>
+        <a href="https://learn.microsoft.com/sql/" target="_blank" class="text-violet-300 hover:text-violet-200">SQL Server docs</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // WHERE interaktiv ma'lumotlari
+    const filterOpData = {
+      COMPARE: {
+        title: "Oddiy taqqoslash operatorlari",
+        description:
+          "=, !=, >, >= kabi operatorlar bilan aniq qiymat yoki oraliq bo'yicha filtrlash mumkin.",
+        example: `-- GPA >= 3.5 bo'lgan talabalar
+SELECT id, full_name, gpa
+FROM students
+WHERE gpa >= 3.5;`,
+        tip: "Raqamli ustunlarda to'g'ri tip (NUMERIC/DECIMAL) tanlash pul va ballar bilan ishlashda muhim."
+      },
+      LOGICAL: {
+        title: "AND / OR / NOT bilan murakkab shartlar",
+        description:
+          "Mantiqiy operatorlar yordamida bir nechta shartni birlashtirasiz. Qavslar ustuvorlikni aniq ko'rsatadi.",
+        example: `-- Kuchli va ma'lum guruhlardagi talabalar
+SELECT id, full_name, group_code, gpa
+FROM students
+WHERE gpa >= 3.5
+  AND (group_code = 'CS-01' OR group_code = 'CS-02');`,
+        tip: "AND har doim OR dan ustunroq. Shuning uchun murakkab shartlarda qavs ishlatmasangiz, kutilmagan natija chiqishi mumkin."
+      },
+      LIKE: {
+        title: "LIKE va wildcards (% va _) bilan qidirish",
+        description:
+          "LIKE operatori matn ustunlarida qisman mos yozuvlarni topish uchun ishlatiladi. % istalgan uzunlikdagi matnni bildiradi, _ esa bitta belgini.",
+        example: `-- 'Ali' bilan boshlanuvchi ism-shariflar
+SELECT id, full_name
+FROM students
+WHERE full_name LIKE 'Ali%';
+
+-- Familiyasi 'ov' bilan tugaydiganlar
+SELECT id, full_name
+FROM students
+WHERE full_name LIKE '%ov';`,
+        tip: "LIKE '%...%' katta jadvallarda sekin bo'lishi mumkin. Kerak bo'lsa, full-text search yoki maxsus indexlardan foydalaning."
+      },
+      BETWEEN_IN: {
+        title: "BETWEEN va IN — o'qilishi oson filtrlar",
+        description:
+          "BETWEEN oraliq uchun, IN esa aniq qiymatlar ro'yxati uchun ishlatiladi.",
+        example: `-- GPA 3.0 va 4.0 orasida
+SELECT full_name, gpa
+FROM students
+WHERE gpa BETWEEN 3.0 AND 4.0;
+
+-- Muayyan guruhlardagi talabalar
+SELECT full_name, group_code
+FROM students
+WHERE group_code IN ('CS-01', 'CS-02', 'CS-03');`,
+        tip: "BETWEEN chegaralarni ham o'z ichiga oladi. Agar faqat qat'iy oraliq kerak bo'lsa, > va < bilan aniq yozing."
+      },
+      NULL: {
+        title: "NULL qiymatlar bilan ishlash",
+        description:
+          "NULL — bu 'qiymat yo'q' degani. Uni = NULL bilan emas, faqat IS NULL / IS NOT NULL bilan tekshiramiz.",
+        example: `-- GPA kiritilmagan talabalar
+SELECT id, full_name
+FROM students
+WHERE gpa IS NULL;
+
+-- GPA mavjud bo'lgan talabalar
+SELECT id, full_name, gpa
+FROM students
+WHERE gpa IS NOT NULL;`,
+        tip: "NULL bilan har qanday arifmetik amal natijasi ham NULL bo'ladi. Kerak bo'lsa, COALESCE bilan default qiymat bering."
+      },
+      ORDER_LIMIT: {
+        title: "ORDER BY va LIMIT bilan natijani boshqarish",
+        description:
+          "ORDER BY natijani tartiblaydi, LIMIT esa nechta qator qaytishini cheklaydi.",
+        example: `-- Eng yaxshi 5 talaba
+SELECT id, full_name, gpa
+FROM students
+WHERE gpa IS NOT NULL
+ORDER BY gpa DESC
+LIMIT 5;`,
+        tip: "ORDER BY bo'lmasa, qatorlar tartibi kafolatlanmaydi. Natija 'tasodifiy' bo'lishi mumkin."
+      }
+    };
+
+    const filterOpButtons = document.querySelectorAll(".sql-filter-btn");
+    const filterOpNameEl = document.getElementById("filter-op-name");
+    const filterOpDescEl = document.getElementById("filter-op-description");
+    const filterOpExampleEl = document.getElementById("filter-op-example");
+    const filterOpTipEl = document.getElementById("filter-op-tip");
+
+    filterOpButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const key = btn.dataset.op;
+        const data = filterOpData[key];
+        if (!data) return;
+
+        filterOpButtons.forEach(b => b.classList.remove("border-emerald-300", "bg-emerald-500/10", "text-emerald-100"));
+        btn.classList.add("border-emerald-300", "bg-emerald-500/10", "text-emerald-100");
+
+        filterOpNameEl.textContent = data.title;
+        filterOpDescEl.textContent = data.description;
+        filterOpExampleEl.textContent = data.example;
+        filterOpTipEl.textContent = data.tip;
+      });
+    });
+
+    // JOIN interaktiv ma'lumotlari
+    const joinOpData = {
+      INNER: {
+        title: "INNER JOIN — faqat mos keladigan satrlar",
+        description:
+          "INNER JOIN ikkala jadvalda ham ON shartiga mos keladigan satrlarni qaytaradi.",
+        example: `SELECT s.full_name, c.title, e.grade
+FROM enrollments e
+INNER JOIN students s ON s.id = e.student_id
+INNER JOIN courses  c ON c.id = e.course_id;`,
+        tip: "Ko'p dialektlarda JOIN yozsangiz ham INNER JOIN deb qabul qilinadi. Aniq yozish yaxshiroq."
+      },
+      LEFT: {
+        title: "LEFT JOIN — chap jadval to'liq, o'ngda bo'lmasa NULL",
+        description:
+          "Chap jadvaldagi barcha satrlar chiqadi, o'ng jadvalda mos bo'lmasa, o'ng tomondagi ustunlar NULL bilan to'ldiriladi.",
+        example: `-- Kurs olgan va olmagan talabalar
+SELECT s.id, s.full_name, e.course_id
+FROM students s
+LEFT JOIN enrollments e ON e.student_id = s.id;`,
+        tip: "LEFT JOIN bilan 'qaysi obyektlar hali bog'lanmagan' degan savollarga javob topish juda oson."
+      },
+      RIGHT: {
+        title: "RIGHT JOIN — o'ng jadval to'liq",
+        description:
+          "RIGHT JOIN LEFT JOIN ning aksi: o'ng jadvaldagi barcha satrlar chiqadi.",
+        example: `SELECT c.id, c.title, e.student_id
+FROM courses c
+RIGHT JOIN enrollments e ON e.course_id = c.id;`,
+        tip: "Ko'p ishlab chiquvchilar LEFT JOIN ni afzal ko'rishadi, RIGHT JOIN o'rniga jadvallar tartibini almashtirish mumkin."
+      },
+      FULL: {
+        title: "FULL OUTER JOIN — ikkala jadvaldagi hamma satrlar",
+        description:
+          "FULL OUTER JOIN ikkala tomondagi barcha satrlarni qaytaradi: mos bo'lsa birlashtiriladi, bo'lmasa NULL bilan to'ldiriladi.",
+        example: `SELECT s.full_name, c.title
+FROM students s
+FULL OUTER JOIN enrollments e ON e.student_id = s.id
+FULL OUTER JOIN courses    c ON c.id = e.course_id;`,
+        tip: "FULL OUTER JOIN hamma RDBMS larda mavjud emas (masalan, MySQL eski versiyalarida). Ba'zida UNION yordamida o'xshash natija olinadi."
+      },
+      CROSS: {
+        title: "CROSS JOIN — Dekart ko'paytma",
+        description:
+          "Har bir chap satr har bir o'ng satr bilan juftlashadi. Satrlar soni chap_son x o'ng_son ga teng bo'ladi.",
+        example: `-- Har bir guruh va kurs kombinatsiyasi
+SELECT DISTINCT s.group_code, c.title
+FROM (SELECT DISTINCT group_code FROM students) s
+CROSS JOIN courses c;`,
+        tip: "Katta jadvallarda CROSS JOIN natijasi juda katta bo'lishi mumkin — ehtiyotkorlik bilan ishlating."
+      },
+      SELF: {
+        title: "SELF JOIN — bitta jadvalni o'zi bilan join qilish",
+        description:
+          "Ierarxik tuzilmalar (xodim va uning boshlig'i) uchun bitta jadvalni o'zi bilan JOIN qilish kerak bo'ladi.",
+        example: `-- Xodim va uning menejeri
+SELECT e.full_name  AS employee,
+       m.full_name  AS manager
+FROM employees e
+LEFT JOIN employees m ON e.manager_id = m.id;`,
+        tip: "SELF JOIN da alias (e, m) ishlatish juda muhim — aks holda qaysi ustun qayerdanligini ajratish qiyinlashadi."
+      }
+    };
+
+    const joinOpButtons = document.querySelectorAll(".sql-join-btn");
+    const joinOpNameEl = document.getElementById("join-op-name");
+    const joinOpDescEl = document.getElementById("join-op-description");
+    const joinOpExampleEl = document.getElementById("join-op-example");
+    const joinOpTipEl = document.getElementById("join-op-tip");
+
+    joinOpButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const key = btn.dataset.op;
+        const data = joinOpData[key];
+        if (!data) return;
+
+        joinOpButtons.forEach(b => b.classList.remove("border-violet-300", "bg-violet-500/10", "text-violet-100"));
+        btn.classList.add("border-violet-300", "bg-violet-500/10", "text-violet-100");
+
+        joinOpNameEl.textContent = data.title;
+        joinOpDescEl.textContent = data.description;
+        joinOpExampleEl.textContent = data.example;
+        joinOpTipEl.textContent = data.tip;
+      });
+    });
+
+    // QUIZ logikasi
+    const quizAnswers = {
+      q1: "q1_needed",
+      q2: "q2_b",
+      q3: "q3_b",
+      q4: "q4_b",
+      q5: "q5_b",
+      q6: "q6_b",
+      q7: "q7_b",
+      q8: "q8_b",
+      q9: "q9_a",
+      q10: "q10_b"
+    };
+
+    const checkQuizBtn = document.getElementById("check-quiz");
+    const quizResultEl = document.getElementById("quiz-result");
+
+    function checkQuestion(name, feedbackId) {
+      const selected = document.querySelector(`input[name="${name}"]:checked`);
+      const feedbackEl = document.getElementById(feedbackId);
+      if (!feedbackEl) return false;
+      if (!selected) {
+        feedbackEl.textContent = "Javob tanlanmagan.";
+        feedbackEl.className = "text-[11px] mt-1 text-amber-300";
+        return false;
+      }
+      const isCorrect = selected.value === quizAnswers[name];
+      if (isCorrect) {
+        feedbackEl.textContent = "To'g'ri!";
+        feedbackEl.className = "text-[11px] mt-1 text-emerald-300";
+      } else {
+        feedbackEl.textContent = "Noto'g'ri. Tegishli bo'limni yana bir bor ko'rib chiqing.";
+        feedbackEl.className = "text-[11px] mt-1 text-rose-300";
+      }
+      return isCorrect;
+    }
+
+    if (checkQuizBtn) {
+      checkQuizBtn.addEventListener("click", () => {
+        let correctCount = 0;
+        const total = 10;
+
+        if (checkQuestion("q1", "feedback-1")) correctCount++;
+        if (checkQuestion("q2", "feedback-2")) correctCount++;
+        if (checkQuestion("q3", "feedback-3")) correctCount++;
+        if (checkQuestion("q4", "feedback-4")) correctCount++;
+        if (checkQuestion("q5", "feedback-5")) correctCount++;
+        if (checkQuestion("q6", "feedback-6")) correctCount++;
+        if (checkQuestion("q7", "feedback-7")) correctCount++;
+        if (checkQuestion("q8", "feedback-8")) correctCount++;
+        if (checkQuestion("q9", "feedback-9")) correctCount++;
+        if (checkQuestion("q10", "feedback-10")) correctCount++;
+
+        if (quizResultEl) {
+          quizResultEl.textContent = `Natija: ${correctCount} / ${total} to'g'ri javob.`;
+          quizResultEl.className =
+            "text-[11px] font-semibold " + (correctCount === total ? "text-emerald-300" : "text-amber-100");
+        }
+      });
+    }
+  </script>
+</body>
+</html>
